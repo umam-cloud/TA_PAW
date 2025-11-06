@@ -28,10 +28,10 @@ main{
 
 .sidebar {
 	position: fixed;
-	top: 10px;
+	top: 0;
 	left: 0;
 	width: 220px;
-	height: 90%;
+	height: 95%;
 	background-color: #F9F9FB;
 	padding: 25px 20px;
 	display: flex;
@@ -69,20 +69,71 @@ main{
 	color: #fff;
 }
 
-.upgrade {
-	background-color: #6C63FF;
-	color: #fff;
-	border: none;
-	border-radius: 10px;
-	padding: 12px;
-	font-weight: 600;
-	cursor: pointer;
-	transition: 0.3s;
+.nav{
+	display: flex;
+	padding: 20px;
+	padding-left:290px ;
+	justify-content: space-between;
 }
 
-.upgrade:hover {
-	background-color: #5548D1;
+.nav .search-box {
+    display: flex;
+    align-items: center;
 }
+
+.nav .search-box input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+.nav .search-box button {
+    background-color: #6C63FF;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.nav.search-box button:hover {
+    opacity: 0.8;
+}
+
+.auth-links{
+	display: flex;
+	gap: 20px;
+}
+
+.auth-links a {
+    text-decoration: none;
+    font-weight: 600;
+    padding: 7px 15px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.auth-links .btn-login {
+    border: 1px solid #6C63FF;
+    color: #6C63FF;
+    background-color: #fff;
+}
+
+.auth-links .btn-login:hover {
+    background-color: #6C63FF;
+    color: white;
+}
+
+.auth-links .btn-register {
+    background-color: #6C63FF;
+    color: white;
+}
+
+.auth-links .btn-register:hover {
+    opacity: 0.8;
+}
+
 
 
 footer {

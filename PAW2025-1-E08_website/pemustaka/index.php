@@ -1,6 +1,10 @@
-<?php require_once '../component/header.php'; ?>
+<?php
+	require_once'../base.php';
+
+	include_once '../component/header.php'; 
+?>
 <main>
-<?php require_once '../component/nav.php'; ?>
+	<?php include_once '../component/sidebar.php'; ?>
 	
 </main>
-<?php require_once '../component/footer.php'; ?>
+<?php include_once '../component/footer.php'; ?>
