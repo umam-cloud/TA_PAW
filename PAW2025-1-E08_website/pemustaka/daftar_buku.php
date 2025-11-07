@@ -1,5 +1,6 @@
 <?php
 	require_once '../base.php';
+	$active = 'dafbuk';
 
  	
  ?>
@@ -7,5 +8,7 @@
  <!DOCTYPE html>
  <html>
  <?php include_once '../component/header.php';  ?>
- 	<?php include_once'../component/beranda.php' ?>
+ 	<main>
+ 		<?php include_once '../component/sidebar.php';  ?>
+ 	</main>
  </html>
