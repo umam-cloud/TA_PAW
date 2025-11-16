@@ -29,14 +29,23 @@ main{
     background-color: #f3f0ff;
 }
 
+body{
+    padding-left: 300px;
+}
+
 .container-form{
     background-color: #fff;
-    width: 60% ;
-    height: 70%;
+    width: 65% ;
+    height: 75%;
     padding: 50px 80px;
     border-radius: 30px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 
+}
+
+.container-form .error{
+    color: red;
+    font-size: 12px;
 }
 
 .container-form .header-form{
@@ -74,42 +83,50 @@ main{
     /* background-color: antiquewhite; */
     flex-direction: column;
     height: 400px;
-    gap: 30px;
+    gap: 10px;
     justify-content: center;
     width:50%;
     align-items: start;
 }
 
 .container-form .box-form .form form{
-    gap: 30px;
+    gap: 20px;
     display: flex;
     flex-direction: column;
 }
 
 .container-form .box-form .form h1{
+    margin-bottom: 5px;
     font-size: 35px;
 }
 
 .container-form .box-form .form form input{
-    width: 400px;
-    height: 20px;
+    width: 450px;
+    height: 30px;
     padding: 10px 20px;
     border-radius: 10px;
     background-color: #e5e4ff;
     border: none;
 }
 
-.container-form .box-form .form form select{
-    padding: 5px 17px;
+.container-form .box-form .form form .input {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-form .box-form .form form .input select{
+    padding: 10px 20px;
+    height: 50px;
     border-radius: 5px;
     background-color: #e5e4ff;
     border: none;
+    width: 490px;
 }
 
 .container-form .box-form .form .ttl{
     margin-top: 10px;
     display: flex;
-    gap: 20px;
+    gap: 23px;
 }
 
 .container-form .box-form .form label{
@@ -118,7 +135,7 @@ main{
 }
 
 .container-form .box-form .form .ttl select{
-    padding: 5px 17px;
+    padding: 5px 25px;
     border-radius: 5px;
     background-color: #e5e4ff;
     border: none;
@@ -126,7 +143,7 @@ main{
 
 .container-form .box-form .form form textarea{
     resize: none;
-    width: 400px;
+    width: 450px;
     padding: 10px 20px;
     height: 50px;
     background-color: #e5e4ff;
@@ -141,6 +158,7 @@ main{
     color: #fff;
     border: none;
     border-radius: 10px;
+    font-size: medium;
 }
 
 .container-form .box-form .form form button:hover{
@@ -150,5 +168,105 @@ main{
 .container-form .box-form .form form a{
     font-weight: 800;
     color: #6c63ff;
+}
+
+.sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 220px;
+	height: 95vh;
+	padding: 20px 0 10px 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border-right: 1px solid #E5E5E5;
+}
+
+.sidebar-container{
+	background-color: #F9F9FB;
+	height: 100%;
+	width: 100%;
+	padding: 25px 20px;
+	border-radius: 30px;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-weight: 800;
+	font-size: 20px;
+	color: #6C63FF;
+	margin-bottom: 40px;
+}
+
+.menu a {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	text-decoration: none;
+	color: #6C757D;
+	font-weight: 500;
+	padding: 12px 15px;
+	border-radius: 10px;
+	margin-bottom: 15px;
+	transition: 0.3s;
+}
+
+.menu a:hover,
+.menu a.active {
+	background-color: #6C63FF;
+	color: #fff;
+}
+
+.nav{
+	display: flex;
+	padding-top:20PX ;
+    padding: 30px;
+}
+
+.nav-container{
+	display: flex;
+	width: 100%;
+	padding: 30px;
+	background-color: #fff;
+	justify-content:end;
+	border-radius: 20px;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.auth-links{
+	display: flex;
+	gap: 20px;
+}
+
+.auth-links a {
+    text-decoration: none;
+    font-weight: 600;
+    padding: 7px 15px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.auth-links .btn-login {
+    border: 1px solid #6C63FF;
+    color: #6C63FF;
+    background-color: #fff;
+}
+
+.auth-links .btn-login:hover {
+    background-color: #6C63FF;
+    color: white;
+}
+
+.auth-links .btn-register {
+    background-color: #6C63FF;
+    color: white;
+}
+
+.auth-links .btn-register:hover {
+    opacity: 0.8;
 }
 

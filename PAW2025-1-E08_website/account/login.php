@@ -1,3 +1,38 @@
+<?php 
+    require_once"validasi.php";
+    require_once"../database.php";
+
+    $username = $password = '';
+    $error_username = $error_password = '';
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        $username = $_POST['username']?? '';
+        $password = $_POST['password'] ?? '';
+
+        if(!wajib_isi($username)){
+            $error_username = 'Username wajib di isi';
+        }elseif(!minusn($username)){
+            $error_username = 'Username minimal 3 karakter';
+        }elseif(!Alfabet($username)){
+            $error_username = 'username hanya karakter';
+        }
+
+        if (!wajib_isi($password)){
+            $error_password = 'Password wajib di isi';
+        }elseif(!Password($password)){
+            $error_password = 'Password minimal dari 8 karakter dan harus ada kombinasi simbol, angka, huruf besar';
+        }
+        
+        $user =login($_POST);
+        var_dump($user);
+
+        if($user == 'pemustaka'){
+            echo'kamu pemustaka';
+        }
+
+        
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +54,15 @@
                 </div>
                 <div class="form">
                     <h1>Login account</h1>
-                    <form action="">
-                        <input type="text" placeholder="Username">
-                        <input type="text"  placeholder="password">
+                    <form action="" method="POST">
+                        <div class="input">
+                            <input type="text" placeholder="Username" name="username">
+                            <font class="error"><?= $error_username?></font>
+                        </div>
+                        <div class="input">
+                            <input type="text"  placeholder="password" name="password">
+                            <font class="error"><?= $error_password?></font>
+                        </div>
                         <button>login</button>
                         <font>Don’t have an account? <a href="register.php">register</a></font>
                     </form>
