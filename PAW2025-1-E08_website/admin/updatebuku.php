@@ -1,6 +1,13 @@
 <?php
-    require_once"../database.php";
-    require_once"../account/validasi.php";
+    require_once('../base.php');
+    require_once(BASE_PATH."/database.php");
+    require_once(BASE_PATH."/account/validasi.php");
+
+    if (!isset($_SESSION['login'])) {
+        header('location:'.BASE_URL.'/account/login.php');
+        exit;
+    }
+
     $buku = getDataBuku($_GET['id_buku']);
     // var_dump($buku);
     $judul = $penulis = $penerbit = $tahun_terbit = '';
@@ -48,15 +55,12 @@
          if ($answer == TRUE) {
             updateBuku($_GET['id_buku'],$_POST);
             header('location:'.BASE_URL.'/admin/daftarbuku.php');
-        }
-        
-       
+        }  
     }
 
+
+
     
-
-
-
 
 ?>
 

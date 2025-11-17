@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('base.php');
 require_once(BASE_PATH . '/conn.php');
 
@@ -25,15 +26,32 @@ function addUser(array $data){
 	]);
 }
 
+function cekAkun(array $data){
+    $stmnt = DBH->prepare('SELECT Username,id_user, Role FROM user WHERE Username = :username');
+    $stmnt->execute([
+        ':username' => $data['username']
+    ]);
+
+    $rows = $stmnt->fetchAll();
+    $jumlahBaris = count($rows);
+    return $jumlahBaris > 0;
+}
+
+
+
 function login(array $data){
-	$stmnt = DBH->prepare('SELECT Username, Password, Role FROM user WHERE Username = :username and Password = :pass');
+	$stmnt = DBH->prepare('SELECT Username, id_user, Role FROM user WHERE Username = :username and Password = :pass');
 	$stmnt->execute([
 		':username' => $data['username'],
 		':pass' => $data['password'],
 	]);
-	$user = $stmnt->fetchAll();
-	$role = $user['Role'];
-	return $role;
+	$row = $stmnt->fetchAll();
+	foreach ($row as $user) {
+		$_SESSION['login'] = TRUE;
+		$_SESSION['username'] = $user['Username'];
+		$_SESSION['role'] = $user['Role'];
+		$_SESSION['id_user'] = $user['id_user'];
+	}
 } 
 
 function getBuku(){

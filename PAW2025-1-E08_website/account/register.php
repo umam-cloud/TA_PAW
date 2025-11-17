@@ -1,10 +1,10 @@
 <?php 
-    require_once"validasi.php";
-    require_once"../base.php";
-    require_once"../database.php";
+    require_once("../base.php");
+    require_once(BASE_PATH.'/account/validasi.php');
+    require_once(BASE_PATH."/database.php");
 
     $username = $nomor = $email = $alamat = $password = $bulan = $tanggal = $tahun = $jenkel = '';
-    $error_username = $error_nomor = $error_email = $error_alamat = $error_password = $error_ttl = $error_jenkel ='';
+    $error_username = $error_nomor = $error_email = $error_alamat = $error_password = $error_ttl = $error_jenkel = $error_register ='';
 
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         $username = $_POST['username']?? '';
@@ -89,8 +89,12 @@
         }
 
         if($succses == TRUE){
-            addUser($_POST);
-            header('location:'.BASE_URL.'/account/login.php');
+            if(cekAkun($_POST)){
+                $error_register='akun sudah ada!!';
+            }else{
+                addUser($_POST);
+                header('location:'.BASE_URL.'/account/login.php');
+            }
         }
     };
 
@@ -101,18 +105,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="<?=BASE_URL.'/assets/css/account.css'?>">
     <title>Document</title>
 </head>
 <body>
-    <main>
+    <main class="account">
         <div class="container-form">
             <div class="header-form">
-                <img src="../assets/img/logo.png" alt=""><h2>PerpusKids</h2>
+                <img src="<?=BASE_URL.'/assets/img/logo.png'?>" alt=""><h2>PerpusKids</h2>
             </div>
             <div class="box-form">
                 <div>
-                    <img src="../assets/img/from.png" alt="">
+                    <img src="<?=BASE_URL.'/assets/img/from.png'?>" alt="">
                     <p>Take your little ones on a magical journey filled with wizards and talking animals.</p>
                 </div>
                 <div class="form">
@@ -164,6 +168,7 @@
                             <textarea name="alamat" id="" placeholder="Alamat"></textarea> 
                             <font class="error"><?= $error_alamat?></font>
                         </div>   
+                        <font class="error"><?= $error_register?></font>
                         <button name="submit">register</button>
                 </div>
             </div>

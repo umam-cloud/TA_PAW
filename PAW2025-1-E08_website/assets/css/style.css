@@ -19,156 +19,19 @@
     /* border: 1px solid black; */
 }
 
+body{
+    padding-left: 300px;
+    background-color: #f3f0ff;
+}
+
 main{
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100vh;
-    justify-content: center;
-    align-items: center;
-    background-color: #f3f0ff;
+    
 }
 
-body{
-    padding-left: 300px;
-}
-
-.container-form{
-    background-color: #fff;
-    width: 65% ;
-    height: 75%;
-    padding: 50px 80px;
-    border-radius: 30px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-
-}
-
-.container-form .error{
-    color: red;
-    font-size: 12px;
-}
-
-.container-form .header-form{
-    display: flex;
-    align-items: center;
-}
-
-.container-form .header-form img{
-    width: 35px;
-}
-
-.container-form .header-form h2{
-    font-size:large;
-}
-
-.container-form .box-form{
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
-.container-form .box-form img{
-    width:80%;
-}
-
-.container-form .box-form p{
-    margin-top: -60px;
-    text-align: center;
-    color: #6c757d;
-    width: 80%;
-}
-
-.container-form .box-form .form{
-    display: flex;
-    /* background-color: antiquewhite; */
-    flex-direction: column;
-    height: 400px;
-    gap: 10px;
-    justify-content: center;
-    width:50%;
-    align-items: start;
-}
-
-.container-form .box-form .form form{
-    gap: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.container-form .box-form .form h1{
-    margin-bottom: 5px;
-    font-size: 35px;
-}
-
-.container-form .box-form .form form input{
-    width: 450px;
-    height: 30px;
-    padding: 10px 20px;
-    border-radius: 10px;
-    background-color: #e5e4ff;
-    border: none;
-}
-
-.container-form .box-form .form form .input {
-    display: flex;
-    flex-direction: column;
-}
-
-.container-form .box-form .form form .input select{
-    padding: 10px 20px;
-    height: 50px;
-    border-radius: 5px;
-    background-color: #e5e4ff;
-    border: none;
-    width: 490px;
-}
-
-.container-form .box-form .form .ttl{
-    margin-top: 10px;
-    display: flex;
-    gap: 23px;
-}
-
-.container-form .box-form .form label{
-    font-size: 14px;
-    color: #6c757d;
-}
-
-.container-form .box-form .form .ttl select{
-    padding: 5px 25px;
-    border-radius: 5px;
-    background-color: #e5e4ff;
-    border: none;
-}
-
-.container-form .box-form .form form textarea{
-    resize: none;
-    width: 450px;
-    padding: 10px 20px;
-    height: 50px;
-    background-color: #e5e4ff;
-    border: none;
-    border-radius: 10px;
-}
-
-.container-form .box-form .form form button{
-    width: 200px;
-    padding: 10px;
-    background-color: #6c63ff;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: medium;
-}
-
-.container-form .box-form .form form button:hover{
-    cursor: grab;
-}
-
-.container-form .box-form .form form a{
-    font-weight: 800;
-    color: #6c63ff;
-}
 
 .sidebar {
 	position: fixed;

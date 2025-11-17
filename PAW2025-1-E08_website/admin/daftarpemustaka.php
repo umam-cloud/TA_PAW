@@ -1,7 +1,13 @@
 <?php
-    require_once("../database.php");
+    require_once("../base.php");
+    require_once(BASE_PATH."/database.php");
     require_once(BASE_PATH."/component/nav.php");
     require_once(BASE_PATH."/component/sidebar.php");
+    
+    if (!isset($_SESSION['login'])) {
+        header('location:'.BASE_URL.'/account/login.php');
+        exit;
+    }
     $pemustaka = getPemustaka();
     // var_dump($buku);
 ?>

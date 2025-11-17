@@ -3,7 +3,7 @@
 define("HOST", "localhost");
 define("USER", "root");
 define("PASS", "");
-define("DBNAME", "perpustakaan");
+define("DBNAME", "library");
 
 // Database Source Name
 const DSN = "mysql:host=" . HOST . ";dbname=" . DBNAME;

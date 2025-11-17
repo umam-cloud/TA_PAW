@@ -1,6 +1,12 @@
 <?php
-    require_once"../database.php";
-    require_once"../account/validasi.php";
+    require_once('../base.php');
+    require_once(BASE_PATH."/database.php");
+    require_once(BASE_PATH."/account/validasi.php");
+
+    if (!isset($_SESSION['login'])) {
+        header('location:'.BASE_URL.'/account/login.php');
+        exit;
+    }
 
     $judul = $penulis = $penerbit = $tahun_terbit = '';
     $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit = '';
