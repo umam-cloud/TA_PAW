@@ -4,6 +4,12 @@
         header('location:'.BASE_URL.'/account/login.php');
         exit;
     }
+
+    if(isset($_POST['pinjam'])){
+        $buku = getDataBuku($_POST['pinjam']);
+        requestPinjam($_POST['pinjam'], 'permintaan');
+
+    }
     $buku = getBuku();
     // var_dump($buku);
 ?>
@@ -21,24 +27,29 @@
         require_once(BASE_PATH."/component/nav.php");
         require_once(BASE_PATH."/component/sidebar.php");
     ?>
-    <a href="<?=BASE_URL.'/admin/tambahbuku.php'?>"><button>Tambah</button></a>
-    <table border='1'>
-        <tr>
-            <th>judul</th>
-            <th>penulis</th>
-            <th>penerbit</th>
-            <th>tahun penulis</th>
-            <th>aksi</th>
-        </tr>
-        <?php foreach ($buku as $book):?>
+    <main>
+        <table border='1'>
             <tr>
-                <td><?= $book['Judul'] ?></td>
-                <td><?= $book['Penulis'] ?></td>
-                <td><?= $book['Penerbit'] ?></td>
-                <td><?= $book['Tahun_Terbit'] ?></td>
-                <td><a href="deletebuku.php ? id_buku=<?= $book['id_buku']?>"><button>pinjam</button></a></td>
+                <th>judul</th>
+                <th>penulis</th>
+                <th>penerbit</th>
+                <th>tahun penulis</th>
+                <th>aksi</th>
             </tr>
-        <?php endforeach ?>
-    </table>
+            <?php foreach ($buku as $book):?>
+                <tr>
+                    <td><?= $book['Judul'] ?></td>
+                    <td><?= $book['Penulis'] ?></td>
+                    <td><?= $book['Penerbit'] ?></td>
+                    <td><?= $book['Tahun_Terbit'] ?></td>
+                    <?php if ($book['Status'] == 'tersedia'):?>
+                         <td><form action="" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>'>pinjam</button></form></td>
+                    <?php elseif ($book['Status'] == 'permintaan' or $book['Status'] == 'dipinjam'):?>
+                        <td><a href=""><button>dipinjam</button></a></td>
+                    <?php endif?>
+                </tr>
+            <?php endforeach ?>
+        </table>
+    </main>
     </body>
 </html>

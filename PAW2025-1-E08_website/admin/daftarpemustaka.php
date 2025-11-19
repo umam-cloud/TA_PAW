@@ -1,8 +1,6 @@
 <?php
     require_once("../base.php");
     require_once(BASE_PATH."/database.php");
-    require_once(BASE_PATH."/component/nav.php");
-    require_once(BASE_PATH."/component/sidebar.php");
     
     if (!isset($_SESSION['login'])) {
         header('location:'.BASE_URL.'/account/login.php');
@@ -10,7 +8,7 @@
     }
     $pemustaka = getPemustaka();
     // var_dump($buku);
-?>
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,23 +19,29 @@
     <title>Document</title>
 </head>
 <body>
-    <table border='1'>
-        <tr>
-            <th>username</th>
-            <th>email</th>
-            <th>jenkel</th>
-            <th>nomor</th>
-            <th>alamat</th>
-        </tr>
-        <?php foreach ($pemustaka as $user):?>
+    <?php 
+    require_once(BASE_PATH."/component/nav.php");
+    require_once(BASE_PATH."/component/sidebar.php");
+    ?>
+    <main>
+        <table border='1'>
             <tr>
-                <td><?= $user['Username'] ?></td>
-                <td><?= $user['Email'] ?></td>
-                <td><?= $user['Jenis_Kelamin'] ?></td>
-                <td><?= $user['Nomor_Telpon'] ?></td>
-                <td><?= $user['Alamat'] ?></td>
+                <th>username</th>
+                <th>email</th>
+                <th>jenkel</th>
+                <th>nomor</th>
+                <th>alamat</th>
             </tr>
-        <?php endforeach ?>
-    </table>
+            <?php foreach ($pemustaka as $user):?>
+                <tr>
+                    <td><?= $user['Username'] ?></td>
+                    <td><?= $user['Email'] ?></td>
+                    <td><?= $user['Jenis_Kelamin'] ?></td>
+                    <td><?= $user['Nomor_Telpon'] ?></td>
+                    <td><?= $user['Alamat'] ?></td>
+                </tr>
+            <?php endforeach ?>
+        </table>
+    </main>
     </body>
 </html>

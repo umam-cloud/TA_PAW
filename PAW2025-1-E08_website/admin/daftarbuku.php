@@ -1,14 +1,14 @@
 <?php
     require_once("../database.php");
-    if (isset($_SESSION['login'])) {
-        header('location:'.BASE_URL.'/login');
+    if (!isset($_SESSION['login'])) {
+        header('location:'.BASE_URL.'/account/login');
         exit;
     }
 
     $buku = getBuku();
 
     // var_dump($buku);
-    ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +19,11 @@
     <title>Document</title>
 </head>
 <body>
+    <?php
+    require_once(BASE_PATH."/component/nav.php");
+    require_once(BASE_PATH."/component/sidebar.php");
+    ?>
     <main>
-        <?php
-        require_once(BASE_PATH."/component/nav.php");
-        require_once(BASE_PATH."/component/sidebar.php");
-        ?>
         <a href="<?=BASE_URL.'/admin/tambahbuku.php'?>"><button>Tambah</button></a>
         <table border='1'>
             <tr>

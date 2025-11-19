@@ -10,7 +10,7 @@
 
     $buku = getDataBuku($_GET['id_buku']);
     // var_dump($buku);
-    $judul = $penulis = $penerbit = $tahun_terbit = '';
+    // $judul = $penulis = $penerbit = $tahun_terbit = '';
     $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit = '';
     
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -75,19 +75,19 @@
     <form action="" method="POST">
         <?php foreach ($buku as $book):?>
             <label for="" >judul</label>
-            <input type="text" name='judul' value='<?=$book['Judul']?>'>
+            <input type="text" name='judul' value='<?= $judul ?? $book['Judul']?>'>
             <font><?=$error_judul?></font>
             <br>
             <label for="" >Penulis</label>
-            <input type="text" name='penulis' value='<?= $book['Penulis']?>'>
+            <input type="text" name='penulis' value='<?= $penulis ?? $book['Penulis']?>'>
             <font><?=$error_penulis?></font>
             <br>
             <label for="" >Penerbit</label>
-            <input type="text" name='penerbit' value='<?= $book['Penerbit']?>'>
+            <input type="text" name='penerbit' value='<?= $penerbit ?? $book['Penerbit']?>'>
             <font><?=$error_penerbit?></font>
             <br>
             <label for="">Tahun_Penulis</label>
-            <input type="text" name='tahun_terbit' value='<?= $book['Tahun_Terbit']?>'>
+            <input type="text" name='tahun_terbit' value='<?= $tahun_terbit ?? $book['Tahun_Terbit']?>'>
             <font><?=$error_tahun_terbit?></font>
             <br>
         <?php endforeach?>

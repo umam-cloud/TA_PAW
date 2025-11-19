@@ -61,6 +61,13 @@ function getBuku(){
 	return $buku;
 }
 
+function getBukuTerbaru(){
+	$stmnt = DBH->prepare('SELECT * FROM buku ORDER BY `Tahun_Terbit` DESC LIMIT 6');
+	$stmnt->execute();
+	$buku = $stmnt->fetchAll();
+	return $buku;
+}
+
 function getDataBuku(int $id){
 	$stmnt = DBH->prepare('SELECT * FROM buku WHERE id_buku = :id_buku');
 	$stmnt->execute([':id_buku' => $id ]);
@@ -95,6 +102,16 @@ function updateBuku(int $id, array $data) {
 		':id_buku' => $id,
 	]);
 }
+
+function requestPinjam(int $id, string $status) {
+	$stmnt = DBH->prepare("UPDATE buku SET Status = :status WHERE ID_Buku = :id_buku");
+	$stmnt->execute([
+		':status' => $status,
+		':id_buku' => $id,
+	]);
+}
+
+
 
 
 
