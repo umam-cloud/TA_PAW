@@ -10,8 +10,16 @@ function getPemustaka(){
 	return $pemustaka;
 }
 
+function getDataPemustaka(int $id){
+	$stmnt = DBH->prepare('SELECT * FROM pemustaka WHERE id_pemustaka = :id_pemustaka');
+	$stmnt->execute([':id_pemustaka' => $id ]);
+	$pemustaka = $stmnt->fetch();
+	return $pemustaka;
+
+}
+
 function addUser(array $data){
-	$stmnt = DBH->prepare('INSERT INTO pemustaka (Username, Password, Email, Nomor_Telpon, Jenis_kelamin, Tgl_Lahir, Alamat) 
+	$stmnt = DBH->prepare('	INSERT INTO pemustaka (Username, Password, Email, Nomor_Telpon, Jenis_kelamin, Tgl_Lahir, Alamat) 
 	VALUE (:username, :pass, :email, :no_telp, :jenkel, :tgl_lahir, :alamat)');
 	$stmnt->execute([
 		':username' => $data['username'],
@@ -24,8 +32,19 @@ function addUser(array $data){
 	]);
 }
 
+function updateUser(int $id, array $data) {
+	$stmnt = DBH->prepare("UPDATE pemustaka SET Username = :usernmae, Email = :email, Alamat = :alamat, Jenis_Kelamin = :jenis_kelamin WHERE id_user = :id_user");
+	$stmnt->execute([
+		':username' => $data['username'],
+		':email' => $data['email'],
+     	':alamat' => $data['alamat'],
+     	':jenis_kelamin' => $data['jenis_kelamin'],
+		':id_user' => $id,
+	]);
+}
+
 function cekAkun(array $data){
-    $stmnt = DBH->prepare('SELECT Username,Status FROM pemustaka WHERE Username= :username UNION SELECT Username,Status FROM admin WHERE Username= :username');
+    $stmnt = DBH->prepare('SELECT Username FROM pemustaka WHERE Username= :username UNION SELECT Username FROM admin WHERE Username= :username');
     $stmnt->execute([
         ':username' => $data['username']
     ]);
@@ -38,7 +57,7 @@ function cekAkun(array $data){
 
 
 function login(array $data){
-	$stmnt = DBH->prepare('SELECT id_pemustaka,Username,Status FROM pemustaka WHERE Username= :username and Password = :pass UNION SELECT id_admin,Username,Status FROM admin WHERE Username= :username and Password = :pass');
+	$stmnt = DBH->prepare('SELECT id_pemustaka AS id,Username,"pemustaka" AS role FROM pemustaka WHERE Username=:username and Password =:pass UNION SELECT id_admin AS id,Username,"admin" AS role FROM admin WHERE Username=:username and Password =:pass');
 	$stmnt->execute([
 		':username' => $data['username'],
 		':pass' => $data['password'],
@@ -46,12 +65,8 @@ function login(array $data){
 	$user = $stmnt->fetch();
 	$_SESSION['login'] = TRUE;
 	$_SESSION['username'] = $user['Username'];
-	if ($user['Status'] == "pemustaka") {
-		$_SESSION['id_user'] = $user['id_pemustaka'];
-	}elseif($user['Status'] == "admin"){
-		$_SESSION['id_user'] = $user['id_admin'];
-	}
-	$_SESSION['role'] = $user['Status'];
+	$_SESSION['id_user'] = $user['id'];
+	$_SESSION['role'] = $user['role'];
 } 
 
 function getBuku(){
@@ -120,7 +135,25 @@ function addPeminjam(int $buku, int $pemustaka){
 	]);
 }
 
-function daftarPeminjaman()
+function daftarPeminjaman(){
+	$stmnt = DBH->prepare(
+	'SELECT 
+    peminjaman.id_peminjaman,
+    buku.Judul AS judul_buku,
+    pemustaka.Username AS username_pemustaka,
+    peminjaman.tgl_peminjaman,
+    peminjaman.tgl_pengembalian
+	FROM peminjaman
+	INNER JOIN buku 
+    ON peminjaman.id_buku = buku.id_buku
+	INNER JOIN pemustaka 
+    ON peminjaman.id_pemustaka = pemustaka.id_pemustaka
+	WHERE buku.Status = "permintaan";
+	');
+	$stmnt->execute();
+	$peminjam = $stmnt->fetchAll();
+	return $peminjam;
+}
 
 
 

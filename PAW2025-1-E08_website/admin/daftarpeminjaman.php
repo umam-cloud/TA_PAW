@@ -6,6 +6,8 @@
         exit;
     }
 
+    $peminjaman = daftarPeminjaman();
+
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= BASE_URL.'/asset/css/style.css' ?>">
+    <link rel="stylesheet" href="<?= BASE_URL.'/assets/css/style.css' ?>">
     <title>Document</title>
 </head>
 <body>
@@ -30,6 +32,12 @@
             <th>Status</th>
             <th></th>
         </tr>
+        <?php foreach ($peminjaman as $peminjam):?>
+            <tr>
+                <td><?= $peminjam['judul_buku'] ?></td>
+                <td><?= $peminjam['username_pemustaka'] ?></td>
+            </tr>
+        <?php endforeach?>
             
         </table>
     </main>

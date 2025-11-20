@@ -3,6 +3,10 @@
     require_once(BASE_PATH."/database.php");
     $bukuTerbaru = getBukuTerbaru();
     // var_dump($bukuTerbaru);
+
+    echo $_SESSION['id_user'];
+    echo $_SESSION['username'];
+    echo $_SESSION['role'];
 ?>
 
 <!DOCTYPE html>
