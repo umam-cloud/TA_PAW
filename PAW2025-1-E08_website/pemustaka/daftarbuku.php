@@ -6,10 +6,10 @@
     }
 
     if(isset($_POST['pinjam'])){
-        $buku = getDataBuku($_POST['pinjam']);
-        requestPinjam($_POST['pinjam'], 'permintaan');
+        addPeminjam($_POST['pinjam'], $_SESSION['id_user']);
+        updateStatusBuku($_POST['pinjam'], 'permintaan');
     }
-    
+
     $buku = getBuku();
     // var_dump($buku);
 ?>
@@ -28,6 +28,20 @@
         require_once(BASE_PATH."/component/sidebar.php");
     ?>
     <main>
+        <div class="input">
+        <select name="kategori" id="">
+            <option value="">Kategori</option>
+            <option value="dongeng">Dongeng</option>
+            <option value="cerita_rakyat">Cerita Rakyat</option>
+            <option value="komik">Komik</option>
+            <option value="novel">Novel</option>
+            <option value="horror">Horror</option>
+            <option value="komedi">Komedi</option>
+            <option value="fantasy">Fantay</option>
+            <option value="sejarah">Sejarah</option>
+        </select>
+        </div>
+
         <table border='1'>
             <tr>
                 <th>judul</th>

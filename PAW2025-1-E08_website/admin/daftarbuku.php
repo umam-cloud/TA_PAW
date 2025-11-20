@@ -44,7 +44,9 @@
                     <td><?= $book['Penulis'] ?></td>
                     <td><?= $book['Penerbit'] ?></td>
                     <td><?= $book['Tahun_Terbit'] ?></td>
-                    <td><a href="deletebuku.php ? id_buku=<?= $book['id_buku']?>"><button>hapus</button></a></td>
+                    <td><a href="deletebuku.php ? id_buku=<?= $book['id_buku']?>">
+                        <button>hapus</button>
+                    </a></td>
                     <td><a href="updatebuku.php ? id_buku=<?= $book['id_buku']?>"><button>edit</button></a></td>
                 </tr>
             <?php endforeach ?>

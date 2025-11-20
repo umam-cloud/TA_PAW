@@ -38,7 +38,7 @@ function cekAkun(array $data){
 
 
 function login(array $data){
-	$stmnt = DBH->prepare('SELECT Username,Status FROM pemustaka WHERE Username= :username and Password = :pass UNION SELECT Username,Status FROM admin WHERE Username= :username and Password = :pass');
+	$stmnt = DBH->prepare('SELECT id_pemustaka,Username,Status FROM pemustaka WHERE Username= :username and Password = :pass UNION SELECT id_admin,Username,Status FROM admin WHERE Username= :username and Password = :pass');
 	$stmnt->execute([
 		':username' => $data['username'],
 		':pass' => $data['password'],
@@ -47,7 +47,7 @@ function login(array $data){
 	$_SESSION['login'] = TRUE;
 	$_SESSION['username'] = $user['Username'];
 	if ($user['Status'] == "pemustaka") {
-		$_SESSION['id_user'] = $user['id_admin'];
+		$_SESSION['id_user'] = $user['id_pemustaka'];
 	}elseif($user['Status'] == "admin"){
 		$_SESSION['id_user'] = $user['id_admin'];
 	}
@@ -71,7 +71,7 @@ function getBukuTerbaru(){
 function getDataBuku(int $id){
 	$stmnt = DBH->prepare('SELECT * FROM buku WHERE id_buku = :id_buku');
 	$stmnt->execute([':id_buku' => $id ]);
-	$buku = $stmnt->fetchAll();
+	$buku = $stmnt->fetch();
 	return $buku;
 }
 
@@ -103,7 +103,7 @@ function updateBuku(int $id, array $data) {
 	]);
 }
 
-function requestPinjam(int $id, string $status) {
+function updateStatusBuku(int $id, string $status) {
 	$stmnt = DBH->prepare("UPDATE buku SET Status = :status WHERE ID_Buku = :id_buku");
 	$stmnt->execute([
 		':status' => $status,
@@ -112,6 +112,15 @@ function requestPinjam(int $id, string $status) {
 }
 
 
+function addPeminjam(int $buku, int $pemustaka){
+	$stmt = DBH->prepare("INSERT INTO peminjaman (id_buku, id_pemustaka) VALUE (:id_buku, :id_pemustaka)");
+	$stmt->execute([
+	':id_buku' => $buku,
+	':id_pemustaka' => $pemustaka,
+	]);
+}
+
+function daftarPeminjaman()
 
 
 
