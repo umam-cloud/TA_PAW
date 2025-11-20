@@ -8,8 +8,8 @@
     if(isset($_POST['pinjam'])){
         $buku = getDataBuku($_POST['pinjam']);
         requestPinjam($_POST['pinjam'], 'permintaan');
-
     }
+    
     $buku = getBuku();
     // var_dump($buku);
 ?>
@@ -45,7 +45,7 @@
                     <?php if ($book['Status'] == 'tersedia'):?>
                          <td><form action="" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>'>pinjam</button></form></td>
                     <?php elseif ($book['Status'] == 'permintaan' or $book['Status'] == 'dipinjam'):?>
-                        <td><a href=""><button>dipinjam</button></a></td>
+                        <td><a href=""><button class="dipinjam">dipinjam</button></a></td>
                     <?php endif?>
                 </tr>
             <?php endforeach ?>

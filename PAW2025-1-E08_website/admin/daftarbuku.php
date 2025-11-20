@@ -1,27 +1,32 @@
 <?php
+    // session_start();
     require_once("../database.php");
     if (!isset($_SESSION['login'])) {
         header('location:'.BASE_URL.'/account/login');
         exit;
     }
-
+    
     $buku = getBuku();
-
+    
+    echo $_SESSION['id_user'];
+    // echo $_SESSION['username'];
+    
     // var_dump($buku);
-?>
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= BASE_URL.'/assets/css/style.css'?>">
-    <title>Document</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="<?= BASE_URL.'/assets/css/style.css'?>">
+        <title>Document</title>
+    </head>
 <body>
     <?php
     require_once(BASE_PATH."/component/nav.php");
     require_once(BASE_PATH."/component/sidebar.php");
+
     ?>
     <main>
         <a href="<?=BASE_URL.'/admin/tambahbuku.php'?>"><button>Tambah</button></a>

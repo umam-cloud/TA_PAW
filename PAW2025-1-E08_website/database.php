@@ -4,16 +4,14 @@ require_once('base.php');
 require_once(BASE_PATH . '/conn.php');
 
 function getPemustaka(){
-	$stmnt = DBH->prepare('SELECT * FROM user WHERE Role = :role');
-	$stmnt->execute([
-		':role' => 'pemustaka'
-	]);
+	$stmnt = DBH->prepare('SELECT * FROM pemustaka');
+	$stmnt->execute();
 	$pemustaka = $stmnt->fetchAll();
 	return $pemustaka;
 }
 
 function addUser(array $data){
-	$stmnt = DBH->prepare('INSERT INTO user (Username, Password, Email, Nomor_Telpon, Jenis_kelamin, Tgl_Lahir, Alamat) 
+	$stmnt = DBH->prepare('INSERT INTO pemustaka (Username, Password, Email, Nomor_Telpon, Jenis_kelamin, Tgl_Lahir, Alamat) 
 	VALUE (:username, :pass, :email, :no_telp, :jenkel, :tgl_lahir, :alamat)');
 	$stmnt->execute([
 		':username' => $data['username'],
@@ -27,7 +25,7 @@ function addUser(array $data){
 }
 
 function cekAkun(array $data){
-    $stmnt = DBH->prepare('SELECT Username,id_user, Role FROM user WHERE Username = :username');
+    $stmnt = DBH->prepare('SELECT Username,Status FROM pemustaka WHERE Username= :username UNION SELECT Username,Status FROM admin WHERE Username= :username');
     $stmnt->execute([
         ':username' => $data['username']
     ]);
@@ -40,18 +38,20 @@ function cekAkun(array $data){
 
 
 function login(array $data){
-	$stmnt = DBH->prepare('SELECT Username, id_user, Role FROM user WHERE Username = :username and Password = :pass');
+	$stmnt = DBH->prepare('SELECT Username,Status FROM pemustaka WHERE Username= :username and Password = :pass UNION SELECT Username,Status FROM admin WHERE Username= :username and Password = :pass');
 	$stmnt->execute([
 		':username' => $data['username'],
 		':pass' => $data['password'],
 	]);
-	$row = $stmnt->fetchAll();
-	foreach ($row as $user) {
-		$_SESSION['login'] = TRUE;
-		$_SESSION['username'] = $user['Username'];
-		$_SESSION['role'] = $user['Role'];
-		$_SESSION['id_user'] = $user['id_user'];
+	$user = $stmnt->fetch();
+	$_SESSION['login'] = TRUE;
+	$_SESSION['username'] = $user['Username'];
+	if ($user['Status'] == "pemustaka") {
+		$_SESSION['id_user'] = $user['id_admin'];
+	}elseif($user['Status'] == "admin"){
+		$_SESSION['id_user'] = $user['id_admin'];
 	}
+	$_SESSION['role'] = $user['Status'];
 } 
 
 function getBuku(){
