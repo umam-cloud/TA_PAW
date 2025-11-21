@@ -5,13 +5,9 @@
         header('location:'.BASE_URL.'/account/login');
         exit;
     }
-    
+
+    $active = 'dafbuk';
     $buku = getBuku();
-    
-    echo $_SESSION['id_user'];
-    // echo $_SESSION['username'];
-    
-    // var_dump($buku);
     ?>
 
 <!DOCTYPE html>

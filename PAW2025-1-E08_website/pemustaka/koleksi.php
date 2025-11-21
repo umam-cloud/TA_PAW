@@ -4,6 +4,8 @@
         header('location:'.BASE_URL.'/account/login.php');
         exit;
     }
+
+    $active = 'koleksi';
     $buku = getBuku();
     // var_dump($buku);
 ?>

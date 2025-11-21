@@ -5,7 +5,7 @@
         header('location:'.BASE_URL.'/account/login.php');
         exit;
     }
-
+    $active = 'dafpemin';
     $peminjaman = daftarPeminjaman();
 
 ?>
@@ -29,13 +29,15 @@
         <tr>
             <th>Nama Peminjam</th>
             <th>Judul Buku</th>
-            <th>Status</th>
+            <th>aksi</th>
             <th></th>
         </tr>
         <?php foreach ($peminjaman as $peminjam):?>
             <tr>
                 <td><?= $peminjam['judul_buku'] ?></td>
                 <td><?= $peminjam['username_pemustaka'] ?></td>
+                <td><button>Terima</button></td>
+                <td><button>Tolak</button></td>
             </tr>
         <?php endforeach?>
             

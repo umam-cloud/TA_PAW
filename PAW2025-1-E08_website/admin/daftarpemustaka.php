@@ -6,6 +6,7 @@
         header('location:'.BASE_URL.'/account/login.php');
         exit;
     }
+    $active = 'dafpemus';
     $pemustaka = getPemustaka();
     // var_dump($buku);
     ?>

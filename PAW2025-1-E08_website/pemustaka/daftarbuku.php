@@ -4,6 +4,7 @@
         header('location:'.BASE_URL.'/account/login.php');
         exit;
     }
+    $active = 'dafbuk';
 
     if(isset($_POST['pinjam'])){
         addPeminjam($_POST['pinjam'], $_SESSION['id_user']);
@@ -42,28 +43,24 @@
         </select>
         </div>
 
-        <table border='1'>
-            <tr>
-                <th>judul</th>
-                <th>penulis</th>
-                <th>penerbit</th>
-                <th>tahun penulis</th>
-                <th>aksi</th>
-            </tr>
+        <div class="menu_dafbuk">
             <?php foreach ($buku as $book):?>
-                <tr>
-                    <td><?= $book['Judul'] ?></td>
-                    <td><?= $book['Penulis'] ?></td>
-                    <td><?= $book['Penerbit'] ?></td>
-                    <td><?= $book['Tahun_Terbit'] ?></td>
-                    <?php if ($book['Status'] == 'tersedia'):?>
-                         <td><form action="" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>'>pinjam</button></form></td>
-                    <?php elseif ($book['Status'] == 'permintaan' or $book['Status'] == 'dipinjam'):?>
-                        <td><a href=""><button class="dipinjam">dipinjam</button></a></td>
-                    <?php endif?>
-                </tr>
+                <div class="dafbuk">
+                    <img src="<?= BASE_URL.'/assets/covbuk/'.$book['Cover'] ?>" alt="" class="cover">
+                    <div class="buku">
+                            <h3><?= $book['Judul'] ?></h3>
+                            <p>Penulis : <?= $book['Penulis'] ?></p>
+                            <p>Penerbit : <?= $book['Penerbit'] ?></p>
+                            <p>Terbit : <?= $book['Tahun_Terbit'] ?></p>
+                            <?php if ($book['Status'] == 'tersedia'):?>
+                                 <form action="" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>'>pinjam</button></form>
+                            <?php elseif ($book['Status'] == 'permintaan' or $book['Status'] == 'dipinjam'):?>
+                                <a href=""><button class="dipinjam">dipinjam</button></a>
+                            <?php endif?>
+                    </div>
+                </div>
             <?php endforeach ?>
-        </table>
+        </div>
     </main>
     </body>
 </html>

@@ -2,11 +2,12 @@
     require_once("base.php");
     require_once(BASE_PATH."/database.php");
     $bukuTerbaru = getBukuTerbaru();
+    $active = 'beranda';
     // var_dump($bukuTerbaru);
 
-    echo $_SESSION['id_user'];
-    echo $_SESSION['username'];
-    echo $_SESSION['role'];
+    // echo $_SESSION['id_user'];
+    // echo $_SESSION['username'];
+    // echo $_SESSION['role'];
 ?>
 
 <!DOCTYPE html>
@@ -24,23 +25,31 @@
         
         ?>
         <main>
-            <h1>Haiiii,  <?= $_SESSION['username']??'Welcome in PerpusKids'?></h1>
-            <table border='1'>
-                <tr>
-                    <th>judul</th>
-                    <th>penulis</th>
-                    <th>penerbit</th>
-                    <th>tahun penulis</th>
-                </tr>
+            <?php if (isset($_SESSION['login'])):?>
+                <div class="welcome">
+                    <h1>Hi,<?=$_SESSION['username']?></h1>
+                    <p>The library serves as a welcoming home for knowledge seekers and avid readers alike</p>
+                </div>
+            <?php elseif (!isset($_SESSION['login'])):?>
+                <div class="welcome">
+                    <h1>Hi, Welcome to PerpusKids</h1>
+                    <p>The library serves as a welcoming home for knowledge seekers and avid readers alike</p>
+                </div>
+            <?php endif?>
+                
+                <div class="menu_dafbuk">
                 <?php foreach ($bukuTerbaru as $newBook):?>
-                    <tr>
-                        <td><?= $newBook['Judul'] ?></td>
-                        <td><?= $newBook['Penulis'] ?></td>
-                        <td><?= $newBook['Penerbit'] ?></td>
-                        <td><?= $newBook['Tahun_Terbit'] ?></td>
-                    </tr>
+                    <div class="dafbuk">
+                    <img src="<?= BASE_URL.'/assets/covbuk/'.$newBook['Cover'] ?>" alt="" class="cover">
+                    <div class="buku">
+                            <h3><?= $newBook['Judul'] ?></h3>
+                            <p>Penulis : <?= $newBook['Penulis'] ?></p>
+                            <p>Penerbit : <?= $newBook['Penerbit'] ?></p>
+                            <p>Terbit : <?= $newBook['Tahun_Terbit'] ?></p>
+                        </div>
+                    </div>
                 <?php endforeach ?>
-            </table>
+            </div>
         </main>
     </body>
 </html>

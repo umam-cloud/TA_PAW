@@ -27,8 +27,9 @@ body{
 main{
     display: flex;
     flex-direction: column;
+    gap: 30px;
     width: 95%;
-    height: 75vh;
+    /* height: 75vh; */
     padding: 30px;
 }
 
@@ -54,7 +55,7 @@ main{
 	height: 100%;
 	width: 250px;
 	padding: 40px 5px 0px 5PX;
-	border-radius: 30px;
+	border-radius: 10px;
 	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -99,6 +100,7 @@ main{
 	display: flex;
 	padding-top:20PX ;
     padding: 30px;
+    padding-bottom: 0;
 }
 
 .nav-container{
@@ -109,7 +111,7 @@ main{
 	background-color: #fff;
 	align-items: center;
 	justify-content:space-between;
-	border-radius: 20px;
+	border-radius: 10px;
 	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -145,14 +147,14 @@ main{
 }
 
 .auth-links .btn-logout {
-    border: 1px solid #6C63FF;
-    color: #6C63FF;
-    background-color: #fff;
+    /* border: 1px solid black; */
+    color: white;
+    background-color: red;
 }
 
 .auth-links .btn-logout:hover {
-    background-color: #6C63FF;
-    color: white;
+    opacity: 0.7;
+    
 }
 
 .auth-links .btn-login {
@@ -162,6 +164,35 @@ main{
 
 .auth-links .btn-login:hover {
     opacity: 0.8;
+}
+
+.auth-links .btn-setting {
+    background-color: #444;	
+    color: white;
+}
+
+.auth-links .btn-setting:hover {
+    opacity: 0.8;
+}
+
+.welcome{
+	background-color:#6C63FF ;
+	padding: 65px 30px;
+	/* margin-right: 30px; */
+    width: 96%;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+	color: #fff;
+	gap: 10px;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.welcome p{
+    width: 500px;
+	text-align: justify;
 }
 
 table {
@@ -230,3 +261,60 @@ button.dipinjam:hover {
     background: #9a9a9a;
 }
 
+.cover{
+    width: 200px;
+    height: 300px;
+    /* border-radius: 20px; */
+    border-radius: 10px 0 0 10px;
+}
+
+.menu_dafbuk{
+    padding: 50px 30px;
+    /* padding-right: 10PX; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 97%;
+    gap: 50px;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.dafbuk{
+    display: flex;
+    width: 46%;
+    border-radius: 10px;
+    height: 300px;
+    gap: 15px;
+    align-items: center;
+    justify-content: left;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.buku{
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-top: 100px ;
+    gap: 5px;
+}
+
+.dafbuk h3{
+    width: 250px;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.dafbuk p{
+    font-size: 14px;
+    width: 300px;
+    color: #6C757D;
+}
+
+.dafbuk .buku button{
+    margin-top: 30px;
+}
