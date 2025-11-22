@@ -2,6 +2,7 @@
 session_start();
 require_once('base.php');
 require_once(BASE_PATH . '/conn.php');
+require_once(BASE_PATH . '/validasi.php');
 
 function getPemustaka(){
 	$stmnt = DBH->prepare('SELECT * FROM pemustaka');
@@ -33,17 +34,17 @@ function addUser(array $data){
 }
 
 function updateUser(int $id, array $data) {
-	$stmnt = DBH->prepare("UPDATE pemustaka SET Username = :usernmae, Email = :email, Alamat = :alamat, Jenis_Kelamin = :jenis_kelamin WHERE id_user = :id_user");
+	$stmnt = DBH->prepare('UPDATE pemustaka SET Username = :username, Email = :email, Alamat = :alamat, Nomor_Telpon = :nomor_telepon WHERE id_pemustaka = :id_user');
 	$stmnt->execute([
 		':username' => $data['username'],
 		':email' => $data['email'],
      	':alamat' => $data['alamat'],
-     	':jenis_kelamin' => $data['jenis_kelamin'],
-		':id_user' => $id,
+     	':nomor_telepon' => $data['tlp'],
+		':id_user'=>$id,
 	]);
 }
 
-function cekAkun(array $data){
+function cekUsernamePemustaka(array $data){
     $stmnt = DBH->prepare('SELECT Username FROM pemustaka WHERE Username= :username UNION SELECT Username FROM admin WHERE Username= :username');
     $stmnt->execute([
         ':username' => $data['username']
@@ -98,12 +99,13 @@ function deleteBuku(int $id){
 
 // //  HEY
 function addBuku(array $data){
-	$stmt = DBH->prepare("INSERT INTO Buku (Judul, Penulis, Penerbit, Tahun_Terbit) VALUE (:Judul, :Penulis, :Penerbit, :Tahun_Terbit)");
+	$stmt = DBH->prepare("INSERT INTO Buku (Judul, Penulis, Penerbit, Tahun_Terbit, Cover) VALUE (:Judul, :Penulis, :Penerbit, :Tahun_Terbit, :Cover)");
 	$stmt->execute([
 	':Judul' => $data ['judul'],
 	':Penulis' => $data ['penulis'],
 	':Penerbit' => $data ['penerbit'],
 	':Tahun_Terbit' => $data ['tahun_terbit'],
+	':Cover' => $data['cover'],
 	]);
 }
 
@@ -132,6 +134,7 @@ function addPeminjam(int $buku, int $pemustaka){
 	$stmt->execute([
 	':id_buku' => $buku,
 	':id_pemustaka' => $pemustaka,
+	':tgl_pengmbalian' => date('Y-m-d')
 	]);
 }
 
@@ -155,6 +158,44 @@ function daftarPeminjaman(){
 	return $peminjam;
 }
 
+function updateProfile(int $id){
+	#menghapus foto sebelumnya
+	$profil = DBH->prepare('SELECT Profil FROM pemustaka WHERE id_pemustaka = :id');
+	$profil->execute([
+		':id' => $id
+	]);
+	$user = $profil->fetch();
+	unlink(BASE_PATH."/assets/fotoProfile/".$user['Profil']);
+
+	#menambahkan foto baru
+	$namaFile = time() . "_" . $_FILES['profil']['name'];
+	$tmpFile = $_FILES['profil']['tmp_name'];
+	$_SESSION['foto_profile'] = $namaFile;
+
+	move_uploaded_file($tmpFile, BASE_PATH."/assets/fotoProfile/" . $namaFile);
+	$query = DBH->prepare("UPDATE pemustaka SET Profil = :profil WHERE id_pemustaka = :id");
+	$query->execute([
+		':profil' => $namaFile,
+		':id' => $id
+	]);
+}
+
+function koleksi(){
+	$id_pemustaka = $_SESSION['id_user'];
+	$stmnt = DBH->prepare(
+		'SELECT b.*
+		 FROM peminjaman AS p
+		 INNER JOIN buku AS b 
+		 ON b.id_buku = p.id_buku
+		 INNER JOIN pemustaka AS ps
+		 ON ps.id_pemustaka = p.id_pemustaka
+		 WHERE p.id_pemustaka = :id_pemustaka and b.Status = "dipinjam"
+		'
+	); 
+	$stmnt->execute([':id_pemustaka' => $id_pemustaka]);
+	$koleksi = $stmnt->fetchAll();
+	return$koleksi;
+}
 
 
 

@@ -1,11 +1,18 @@
+<?php 
+    if (isset($_SESSION['id_user'])) {
+      $dataPemustaka = getDataPemustaka($_SESSION['id_user']);
+      $fotoProfile = $dataPemustaka['Profil']??'profile.png';
+    }else {
+      $fotoProfile = 'profile.png';
+    }
+?>
 <div class="sidebar">
   <div class="sidebar-container">
-    <!-- <?php if ($_SESSION['role'] == 'pemustaka'):?>
-      <a href=""><img src="<?= BASE_URL.'/assets/img/about.png'?>" alt="" class="profile"></a>
-      <?php elseif ($_SESSION['role'] == 'admin'):?>
-        <h3><?= $_SESSION['username']?></h3>
-        <?php endif?> -->
-    <a href=""><img src="<?= BASE_URL.'/assets/img/about.png'?>" alt="" class="profile"></a>
+    <?php if (!isset($_SESSION['role']) or $_SESSION['role'] == 'pemustaka'):?>
+      <img src="<?= BASE_URL.'/assets/fotoProfile/'.($_SESSION['foto_profile']??$fotoProfile) ?>" alt="" class="profile">
+    <?php elseif ($_SESSION['role'] == 'admin'):?>
+      <img src="<?= BASE_URL.'/assets/fotoProfile/profile.png'?>" alt="" class="profile">
+    <?php endif?>
     <div>
       <div class="menu">
         <?php if (!isset($_SESSION['role']) or $_SESSION['role']=='pemustaka'):?>

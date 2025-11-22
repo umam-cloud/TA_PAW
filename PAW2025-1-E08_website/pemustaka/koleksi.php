@@ -6,7 +6,7 @@
     }
 
     $active = 'koleksi';
-    $buku = getBuku();
+    $koleksi_buku = koleksi();
     // var_dump($buku);
 ?>
 
@@ -32,16 +32,15 @@
                 <th>tahun penulis</th>
                 <th>aksi</th>
             </tr>
-            <?php foreach ($buku as $book):?>
+            <?php foreach ($koleksi_buku as $koleksi):?>
                 <tr>
-                    <td><?= $book['Judul'] ?></td>
-                    <td><?= $book['Penulis'] ?></td>
-                    <td><?= $book['Penerbit'] ?></td>
-                    <td><?= $book['Tahun_Terbit'] ?></td>
-                    <td><a href="deletebuku.php ? id_buku=<?= $book['id_buku']?>"><button>pinjam</button></a></td>
+                    <td><?= $koleksi['Judul'] ?></td>
+                    <td><?= $koleksi['Penulis'] ?></td>
+                    <td><?= $koleksi['Penerbit'] ?></td>
+                    <td><?= $koleksi['Tahun_Terbit'] ?></td> 
                 </tr>
             <?php endforeach ?>
         </table>
-    </main>
+    </main>
     </body>
 </html>

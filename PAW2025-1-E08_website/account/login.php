@@ -2,7 +2,6 @@
     // session_start();
     require_once('../base.php');
     require_once(BASE_PATH."/database.php");
-    require_once(BASE_PATH.'/account/validasi.php');
 
     $username = $password = '';
     $error_username = $error_password = $error_login = '';
@@ -31,7 +30,7 @@
         }
 
         if($succses == TRUE){
-            if(cekAkun($_POST)){
+            if(cekUsernamePemustaka($_POST)){
                 login($_POST);
                 header('location:'.BASE_URL.'/index.php');
             }else{

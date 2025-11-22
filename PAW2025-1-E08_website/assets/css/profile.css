@@ -1,0 +1,253 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Regular.ttf');
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-Regular.ttf');
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-Regular.ttf');
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family:  'Inter', 'Poppins', sans-serif;
+    text-decoration: none;
+    scrollbar-width: none;
+    /* border: 1px solid black; */
+}
+
+
+body {
+    background: #f4eeff;
+}
+
+
+main{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+/* KIRI (Profile Card) */
+.left-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    height: 60%;
+    width: 35%;
+    border-radius: 15px;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+}
+
+.left-card h2 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.role {
+    color: #2ecc71;
+    font-weight: 500;
+}
+
+.profile-placeholder {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.circle{
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    /* background: #ddd6ff; */
+    border: 10px solid #f0eaff;
+    object-fit: cover;
+}
+
+/* KANAN (Biodata Card) */
+.right-card {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    height: 60%;
+    width: 40%;
+    background: #fff;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+}
+
+.right-card .container-biodata{
+    width: 100%;
+}
+
+.biodata-title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.biodata{
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    margin-bottom: 15px;
+}
+
+.biodata font{
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.biodata p {
+    width: 95%;
+    background: #e9e4ff;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    outline: none;
+}
+
+textarea {
+    height: 110px;
+    resize: none;
+}
+
+/* Dua input sejajar */
+.double-input {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.double-input input {
+    background: #e9e4ff;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+/* Tombol simpan */
+.button-holder {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    justify-content: end;
+}
+
+.btn-save {
+    background: #ffa726;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-save:hover {
+    background: #ff8f00;
+}
+
+
+/* Card putih */
+.card {
+    width: 50%;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+/* Judul */
+.title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* Group setiap input */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Label */
+.form-group label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* Input & Textarea */
+.form-group input,textarea {
+    width: 95%;
+    padding: 14px 16px;
+    border: none;
+    outline: none;
+    background: #e9e3ff;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+textarea {
+    height: 120px;
+}
+
+/* Tombol */
+.form-btn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding: 0 20px;
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s ease-in-out;
+}
+
+/* Tombol Batal */
+.cancel {
+    background: #ddd;
+}
+
+.cancel:hover {
+    background: #ccc;
+}
+
+/* Tombol Simpan */
+.save {
+    background: #2ecc71;
+    color: #fff;
+}
+
+.save:hover {
+    background: #2ecc99;
+}
+
+.error{
+    color: red;
+    font-size: 12px;
+}

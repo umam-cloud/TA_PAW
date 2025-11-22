@@ -1,6 +1,5 @@
 <?php 
     require_once("../base.php");
-    require_once(BASE_PATH.'/account/validasi.php');
     require_once(BASE_PATH."/database.php");
 
     $username = $nomor = $email = $alamat = $password = $bulan = $tanggal = $tahun = $jenkel = '';
@@ -89,7 +88,7 @@
         }
 
         if($succses == TRUE){
-            if(cekAkun($_POST)){
+            if(cekUsernamePemustaka($_POST)){
                 $error_register='akun sudah ada!!';
             }else{
                 addUser($_POST);

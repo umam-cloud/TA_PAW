@@ -29,6 +29,8 @@
         <tr>
             <th>Nama Peminjam</th>
             <th>Judul Buku</th>
+            <th>Tanggal Peminjaman</th>
+            <th>Tanggal Pemngembalian</th>
             <th>aksi</th>
             <th></th>
         </tr>
@@ -36,6 +38,8 @@
             <tr>
                 <td><?= $peminjam['judul_buku'] ?></td>
                 <td><?= $peminjam['username_pemustaka'] ?></td>
+                <td><?= date('Y-m-d', strtotime($peminjam['tgl_peminjaman'])) ?></td>
+                <td><?= date('Y-m-d', strtotime($peminjam['tgl_peminjaman'] . ' +1 day'))?></td>
                 <td><button>Terima</button></td>
                 <td><button>Tolak</button></td>
             </tr>

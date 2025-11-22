@@ -3,11 +3,7 @@
     require_once(BASE_PATH."/database.php");
     $bukuTerbaru = getBukuTerbaru();
     $active = 'beranda';
-    // var_dump($bukuTerbaru);
-
-    // echo $_SESSION['id_user'];
-    // echo $_SESSION['username'];
-    // echo $_SESSION['role'];
+    
 ?>
 
 <!DOCTYPE html>
@@ -29,11 +25,13 @@
                 <div class="welcome">
                     <h1>Hi,<?=$_SESSION['username']?></h1>
                     <p>The library serves as a welcoming home for knowledge seekers and avid readers alike</p>
+                    <img src="<?= BASE_URL.'/assets/img/hero.png'?>" alt="">
                 </div>
             <?php elseif (!isset($_SESSION['login'])):?>
                 <div class="welcome">
                     <h1>Hi, Welcome to PerpusKids</h1>
                     <p>The library serves as a welcoming home for knowledge seekers and avid readers alike</p>
+                    <img src="<?= BASE_URL.'/assets/img/hero.png'?>" alt="">
                 </div>
             <?php endif?>
                 
