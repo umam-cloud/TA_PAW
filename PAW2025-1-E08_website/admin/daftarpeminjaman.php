@@ -9,12 +9,12 @@
     $hari_ini = date('Y-m-d');
     $peminjaman = daftarPeminjaman();
 
-    if (isset($_POST['btn'])) {
-        $btn = $_POST['btn']
-        if ($btn == 'terima') {
+    // if (isset($_POST['btn'])) {
+    //     $btn = $_POST['btn']
+    //     if ($btn == 'terima') {
             
-        }
-    }
+    //     }
+    // }
 
 ?>
 
