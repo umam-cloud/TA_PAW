@@ -119,7 +119,7 @@
                     <p>Take your little ones on a magical journey filled with wizards and talking animals.</p>
                 </div>
                 <div class="form">
-                    <h1>Create an  account</h1>
+                    <h1>Create an account</h1>
                     <form action="" method="POST">
                         <div class="input">
                             <input type="text" placeholder="Username" name="username">
@@ -140,13 +140,13 @@
                         <div class="input">
                             <select name="jenkel" id="">
                                 <option value="">---Jenis Kelamin---</option>
-                                <option value="Laki-laki">---laki---</option>
-                                <option value="Perempuan">---per---</option>
+                                <option value="Laki-laki">---Laki-Laki---</option>
+                                <option value="Perempuan">---Perempuan---</option>
                             </select>
                             <font class="error"><?= $error_jenkel?></font>
                         </div>
                         <div>
-                            <label for="">Tanggal lahir :</label>
+                            <label for="">Tanggal lahir:</label>
                             <div class="ttl">
                                 <select name="tahun" id="">
                                     <option value="">---Tahun---</option>
@@ -168,7 +168,7 @@
                             <font class="error"><?= $error_alamat?></font>
                         </div>   
                         <font class="error"><?= $error_register?></font>
-                        <button name="submit">register</button>
+                        <button name="submit">Register</button>
                 </div>
             </div>
         </div>

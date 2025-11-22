@@ -6,7 +6,15 @@
         exit;
     }
     $active = 'dafpemin';
+    $hari_ini = date('Y-m-d');
     $peminjaman = daftarPeminjaman();
+
+    if (isset($_POST['btn'])) {
+        $btn = $_POST['btn']
+        if ($btn == 'terima') {
+            
+        }
+    }
 
 ?>
 
@@ -27,22 +35,28 @@
         <h1>Daftar Peminjam</h1>
         <table border='1'>
         <tr>
-            <th>Nama Peminjam</th>
             <th>Judul Buku</th>
+            <th>Nama Peminjam</th>
             <th>Tanggal Peminjaman</th>
             <th>Tanggal Pemngembalian</th>
-            <th>aksi</th>
+            <th>Aksi</th>
             <th></th>
         </tr>
         <?php foreach ($peminjaman as $peminjam):?>
-            <tr>
-                <td><?= $peminjam['judul_buku'] ?></td>
-                <td><?= $peminjam['username_pemustaka'] ?></td>
-                <td><?= date('Y-m-d', strtotime($peminjam['tgl_peminjaman'])) ?></td>
-                <td><?= date('Y-m-d', strtotime($peminjam['tgl_peminjaman'] . ' +1 day'))?></td>
-                <td><button>Terima</button></td>
-                <td><button>Tolak</button></td>
-            </tr>
+            <?php if ($hari_ini>$peminjam['tgl_pengembalian'] ):?>
+                <?php  updateStatusBuku($peminjam['id_buku'], 'tersedia') ?>
+            <?php else:?>
+                <tr>
+                    <td><?= $peminjam['judul_buku'] ?></td>
+                    <td><?= $peminjam['username_pemustaka'] ?></td>
+                    <td><?= date('Y-m-d', strtotime($peminjam['tgl_peminjaman'])) ?></td>
+                    <td><?= $peminjam['tgl_pengembalian'] ?></td>
+                    <form action="" method="POST">
+                        <td><button name="btn" value="terima">Terima</button></td>
+                        <td><button name="btn" value="tolak">Tolak</button></td>
+                    </form>
+                </tr>
+            <?php endif?>
         <?php endforeach?>
             
         </table>

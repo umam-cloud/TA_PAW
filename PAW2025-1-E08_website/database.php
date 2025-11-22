@@ -130,11 +130,11 @@ function updateStatusBuku(int $id, string $status) {
 
 
 function addPeminjam(int $buku, int $pemustaka){
-	$stmt = DBH->prepare("INSERT INTO peminjaman (id_buku, id_pemustaka) VALUE (:id_buku, :id_pemustaka)");
+	$stmt = DBH->prepare("INSERT INTO peminjaman (id_buku, id_pemustaka, tgl_pengembalian) VALUE (:id_buku, :id_pemustaka, :tgl_pengembalian)");
 	$stmt->execute([
 	':id_buku' => $buku,
 	':id_pemustaka' => $pemustaka,
-	':tgl_pengmbalian' => date('Y-m-d')
+	':tgl_pengembalian' => date('Y-m-d', strtotime('+1 day')),
 	]);
 }
 
@@ -142,6 +142,7 @@ function daftarPeminjaman(){
 	$stmnt = DBH->prepare(
 	'SELECT 
     peminjaman.id_peminjaman,
+	buku.id_buku,
     buku.Judul AS judul_buku,
     pemustaka.Username AS username_pemustaka,
     peminjaman.tgl_peminjaman,
@@ -183,7 +184,7 @@ function updateProfile(int $id){
 function koleksi(){
 	$id_pemustaka = $_SESSION['id_user'];
 	$stmnt = DBH->prepare(
-		'SELECT b.*
+		'SELECT b.* ,p.*
 		 FROM peminjaman AS p
 		 INNER JOIN buku AS b 
 		 ON b.id_buku = p.id_buku

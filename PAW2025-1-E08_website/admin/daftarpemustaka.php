@@ -27,11 +27,11 @@
     <main>
         <table border='1'>
             <tr>
-                <th>username</th>
-                <th>email</th>
-                <th>jenkel</th>
-                <th>nomor</th>
-                <th>alamat</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Jenkel</th>
+                <th>Nomor</th>
+                <th>Alamat</th>
             </tr>
             <?php foreach ($pemustaka as $user):?>
                 <tr>

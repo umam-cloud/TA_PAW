@@ -24,23 +24,21 @@
         require_once(BASE_PATH."/component/sidebar.php");
     ?>
     <main>
-        <table border='1'>
-            <tr>
-                <th>judul</th>
-                <th>penulis</th>
-                <th>penerbit</th>
-                <th>tahun penulis</th>
-                <th>aksi</th>
-            </tr>
+        <div class="menu_dafbuk">
             <?php foreach ($koleksi_buku as $koleksi):?>
-                <tr>
-                    <td><?= $koleksi['Judul'] ?></td>
-                    <td><?= $koleksi['Penulis'] ?></td>
-                    <td><?= $koleksi['Penerbit'] ?></td>
-                    <td><?= $koleksi['Tahun_Terbit'] ?></td> 
-                </tr>
+                <div class="dafbuk-koleksi">
+                    <img src="<?= BASE_URL.'/assets/covbuk/'.$koleksi['Cover'] ?>" alt="" class="cover">
+                    <div class="buku">
+                            <h3><?= $koleksi['Judul'] ?></h3>
+                            <p>Penulis : <?= $koleksi['Penulis'] ?></p>
+                            <p>Penerbit : <?= $koleksi['Penerbit'] ?></p>
+                            <p>Terbit : <?= $koleksi['Tahun_Terbit'] ?></p>
+                            <p>Terbit : <?= date('Y-m-d', strtotime($koleksi['tgl_peminjaman'])) ?></p>
+                            <p>Terbit : <?= $koleksi['tgl_pengembalian'] ?></p>
+                    </div>
+                </div>
             <?php endforeach ?>
-        </table>
+        </div>
     </main>
     </body>
 </html>

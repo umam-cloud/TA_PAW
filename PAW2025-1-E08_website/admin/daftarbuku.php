@@ -28,11 +28,11 @@
         <a href="<?=BASE_URL.'/admin/tambahbuku.php'?>"><button>Tambah</button></a>
         <table border='1'>
             <tr>
-                <th>judul</th>
-                <th>penulis</th>
-                <th>penerbit</th>
-                <th>tahun penulis</th>
-                <th>aksi</th>
+                <th>Judul</th>
+                <th>Penulis</th>
+                <th>Penerbit</th>
+                <th>Tahun Penulis</th>
+                <th>Aksi</th>
             </tr>
             <?php foreach ($buku as $book):?>
                 <tr>
@@ -41,9 +41,9 @@
                     <td><?= $book['Penerbit'] ?></td>
                     <td><?= $book['Tahun_Terbit'] ?></td>
                     <td><a href="deletebuku.php ? id_buku=<?= $book['id_buku']?>">
-                        <button>hapus</button>
+                        <button>Hapus</button>
                     </a></td>
-                    <td><a href="updatebuku.php ? id_buku=<?= $book['id_buku']?>"><button>edit</button></a></td>
+                    <td><a href="updatebuku.php ? id_buku=<?= $book['id_buku']?>"><button>Edit</button></a></td>
                 </tr>
             <?php endforeach ?>
         </table>

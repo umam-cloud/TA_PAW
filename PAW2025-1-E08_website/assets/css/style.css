@@ -203,7 +203,8 @@ main{
 }
 
 .welcome p{
-    width: 500px;
+    width: 550px;
+    font-size: 18px;
 	text-align: justify;
 }
 
@@ -305,6 +306,17 @@ button.dipinjam:hover {
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 }
 
+.dafbuk-koleksi{
+    display: flex;
+    width: 90%;
+    border-radius: 10px;
+    height: 300px;
+    gap: 15px;
+    align-items: center;
+    justify-content: left;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
 .buku{
     margin-left: 15px;
     display: flex;
@@ -314,20 +326,20 @@ button.dipinjam:hover {
     gap: 5px;
 }
 
-.dafbuk h3{
+.menu_dafbuk h3{
     width: 250px;
     margin-bottom: 20px;
     font-size: 22px;
     font-weight: 600;
 }
 
-.dafbuk p{
+.menu_dafbuk p{
     font-size: 14px;
     width: 300px;
     color: #6C757D;
 }
 
-.dafbuk .buku button{
+.menu_dafbuk .buku button{
     margin-top: 30px;
 }
 

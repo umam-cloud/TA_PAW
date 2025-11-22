@@ -32,14 +32,10 @@
         <div class="input">
         <select name="kategori" id="">
             <option value="">Kategori</option>
-            <option value="dongeng">Dongeng</option>
-            <option value="cerita_rakyat">Cerita Rakyat</option>
-            <option value="komik">Komik</option>
-            <option value="novel">Novel</option>
-            <option value="horror">Horror</option>
-            <option value="komedi">Komedi</option>
-            <option value="fantasy">Fantay</option>
-            <option value="sejarah">Sejarah</option>
+            <option value="dongeng">Fiksi</option>
+            <option value="cerita_rakyat">Non Fiksi</option>
+            <option value="komik">Pendidikan</option>
+            <option value="novel">Hiburan</option>
         </select>
         </div>
 
@@ -53,9 +49,9 @@
                             <p>Penerbit : <?= $book['Penerbit'] ?></p>
                             <p>Terbit : <?= $book['Tahun_Terbit'] ?></p>
                             <?php if ($book['Status'] == 'tersedia'):?>
-                                 <form action="" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>'>pinjam</button></form>
+                                 <form action="" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>'>Pinjam</button></form>
                             <?php elseif ($book['Status'] == 'permintaan' or $book['Status'] == 'dipinjam'):?>
-                                <a href=""><button class="dipinjam">dipinjam</button></a>
+                                <a href=""><button class="dipinjam">Dipinjam</button></a>
                             <?php endif?>
                     </div>
                 </div>

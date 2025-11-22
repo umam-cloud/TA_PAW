@@ -4,7 +4,7 @@
 		<div class="nav-button">
 			<?php if (!isset($_SESSION['login'])):?>
 				<div class="auth-links">
-					<a href="<?= BASE_URL.'/account/login.php' ?>" class="btn-login">login</a>
+					<a href="<?= BASE_URL.'/account/login.php' ?>" class="btn-login">Login</a>
 				</div>
 				<?php else:?>
 					<?php if ($_SESSION['role'] == 'pemustaka'):?>

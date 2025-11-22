@@ -92,25 +92,25 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Username</label>
+                    <label>Username: </label>
                     <input type="text" name="username" value="<?=$username??$dataPemustaka['Username']; ?>">
                      <font class="error"><?= $error_username?></font>
                 </div>
 
                 <div class="form-group">
-                    <label>Email</label>
+                    <label>Email: </label>
                     <input type="text" name="email" value="<?=$email??$dataPemustaka['Email']; ?>">
                      <font class="error"><?= $error_email?></font>
                 </div>
 
                 <div class="form-group">
-                    <label>No Telepon</label>
+                    <label>No Telepon: </label>
                     <input type="text" name="tlp" value="<?=$nomor??$dataPemustaka['Nomor_Telpon']; ?>">
                      <font class="error"><?= $error_nomor?></font>
                 </div>
 
                 <div class="form-group">
-                    <label>Alamat</label>
+                    <label>Alamat: </label>
                     <textarea name="alamat"><?=$alamat??$dataPemustaka['Alamat']; ?></textarea>
                     <font class="error"><?= $error_alamat?></font>
                 </div>

@@ -72,23 +72,23 @@
 </head>
 <body>
     <form action="" method="POST">
-            <label for="" >judul</label>
+            <label for="" >judul:</label>
             <input type="text" name='judul' value='<?= $judul ?? $buku['Judul']?>'>
             <font><?=$error_judul?></font>
             <br>
-            <label for="" >Penulis</label>
+            <label for="" >Penulis:</label>
             <input type="text" name='penulis' value='<?= $penulis ?? $buku['Penulis']?>'>
             <font><?=$error_penulis?></font>
             <br>
-            <label for="" >Penerbit</label>
+            <label for="" >Penerbit:</label>
             <input type="text" name='penerbit' value='<?= $penerbit ?? $buku['Penerbit']?>'>
             <font><?=$error_penerbit?></font>
             <br>
-            <label for="">Tahun_Penulis</label>
+            <label for="">Tahun Penulis:</label>
             <input type="text" name='tahun_terbit' value='<?= $tahun_terbit ?? $buku['Tahun_Terbit']?>'>
             <font><?=$error_tahun_terbit?></font>
             <br>
-        <button name='submit'>tambah</button>
+        <button name='submit'>Tambah</button>
     </form>
 </body>
 </html>
