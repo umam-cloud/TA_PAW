@@ -56,6 +56,19 @@ function cekUsernamePemustaka(array $data){
 }
 
 
+function cekAkun(array $data){
+    $stmnt = DBH->prepare('SELECT Username FROM pemustaka WHERE Username= :username and Password = :password UNION SELECT Username FROM admin WHERE Username= :username and Password = :password');
+    $stmnt->execute([
+        ':username' => $data['username'],
+        ':password' => $data['password'],
+    ]);
+
+    $rows = $stmnt->fetchAll();
+    $jumlahBaris = count($rows);
+    return $jumlahBaris > 0;
+}
+
+
 
 function login(array $data){
 	$stmnt = DBH->prepare('SELECT id_pemustaka AS id,Username,"pemustaka" AS role FROM pemustaka WHERE Username=:username and Password =:pass UNION SELECT id_admin AS id,Username,"admin" AS role FROM admin WHERE Username=:username and Password =:pass');
@@ -96,17 +109,20 @@ function deleteBuku(int $id){
 	$stmnt->execute([':id_buku' => $id ]);
 }
 
-
-// //  HEY
 function addBuku(array $data){
 	$stmt = DBH->prepare("INSERT INTO Buku (Judul, Penulis, Penerbit, Tahun_Terbit, Cover) VALUE (:Judul, :Penulis, :Penerbit, :Tahun_Terbit, :Cover)");
+	$namaFile = time() . "_" . $_FILES['cover']['name'];
+	$tmpFile = $_FILES['cover']['tmp_name'];
 	$stmt->execute([
 	':Judul' => $data ['judul'],
 	':Penulis' => $data ['penulis'],
 	':Penerbit' => $data ['penerbit'],
 	':Tahun_Terbit' => $data ['tahun_terbit'],
-	':Cover' => $data['cover'],
+	':Cover' => $namaFile,
 	]);
+
+	#menambahkan foto baru
+	move_uploaded_file($tmpFile, BASE_PATH."/assets/covbuk/" . $namaFile);
 }
 
 function updateBuku(int $id, array $data) {
@@ -119,6 +135,30 @@ function updateBuku(int $id, array $data) {
 		':id_buku' => $id,
 	]);
 }
+
+function updateCover(int $id){
+	#menghapus foto sebelumnya
+	$cover = DBH->prepare('SELECT Cover FROM buku WHERE id_buku = :id');
+	$cover->execute([
+		':id' => $id
+	]);
+	$buku = $cover->fetch();
+	unlink(BASE_PATH."/assets/fotoProfile/".$buku['Profil']);
+
+	#menambahkan foto baru
+	$namaFile = time() . "_" . $_FILES['cover']['name'];
+	$tmpFile = $_FILES['cover']['tmp_name'];
+
+	move_uploaded_file($tmpFile, BASE_PATH."/assets/covbuk/" . $namaFile);
+	$query = DBH->prepare("UPDATE buku SET Cover = :cover WHERE id_buku = :id");
+	$query->execute([
+		':cover' => $namaFile,
+		':id' => $id
+	]);
+}
+
+
+// ==== sistem peminjaman ======
 
 function updateStatusBuku(int $id, string $status) {
 	$stmnt = DBH->prepare("UPDATE buku SET Status = :status WHERE ID_Buku = :id_buku");
@@ -190,7 +230,7 @@ function koleksi(){
 		 ON b.id_buku = p.id_buku
 		 INNER JOIN pemustaka AS ps
 		 ON ps.id_pemustaka = p.id_pemustaka
-		 WHERE p.id_pemustaka = :id_pemustaka and b.Status = "dipinjam"
+		 WHERE p.id_pemustaka = :id_pemustaka
 		'
 	); 
 	$stmnt->execute([':id_pemustaka' => $id_pemustaka]);

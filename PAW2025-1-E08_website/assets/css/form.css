@@ -1,0 +1,82 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Regular.ttf');
+} 
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-Regular.ttf');
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-Regular.ttf');
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+}
+body{
+    background-color: #f3f0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.box{
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 550px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.box h1{
+    margin-bottom: 20px;
+}
+.box form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.form-group{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.box label{
+    width: 150px;
+    font-weight: 600;
+    text-align: left; 
+}
+
+.box input{
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e5e4ff;
+    background-color: #e5e4ff;
+    width: 100%;
+}
+.box button{
+    padding: 12px 20px;
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 150px;
+}
+
+.box .btn{
+    display: flex;
+    gap: 30px;
+}
+
+.error{
+    color: red;
+    font-size: 12px;
+    margin-left: 25%;
+}

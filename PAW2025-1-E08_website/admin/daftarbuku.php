@@ -40,10 +40,12 @@
                     <td><?= $book['Penulis'] ?></td>
                     <td><?= $book['Penerbit'] ?></td>
                     <td><?= $book['Tahun_Terbit'] ?></td>
-                    <td><a href="deletebuku.php ? id_buku=<?= $book['id_buku']?>">
-                        <button>Hapus</button>
-                    </a></td>
-                    <td><a href="updatebuku.php ? id_buku=<?= $book['id_buku']?>"><button>Edit</button></a></td>
+                    <td>
+                        <div class="updel-buku">
+                            <a href="deletebuku.php ? id_buku=<?= $book['id_buku']?>"><button>Hapus</button></a>
+                            <a href="updatebuku.php ? id_buku=<?= $book['id_buku']?>" ><button >Edit</button></a>
+                        </div>
+                    </td>
                 </tr>
             <?php endforeach ?>
         </table>

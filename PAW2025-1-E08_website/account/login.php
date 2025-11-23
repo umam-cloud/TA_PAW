@@ -30,7 +30,7 @@
         }
 
         if($succses == TRUE){
-            if(cekUsernamePemustaka($_POST)){
+            if(cekAkun($_POST)){
                 login($_POST);
                 header('location:'.BASE_URL.'/index.php');
             }else{

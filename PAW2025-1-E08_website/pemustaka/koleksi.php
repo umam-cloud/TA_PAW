@@ -33,8 +33,8 @@
                             <p>Penulis : <?= $koleksi['Penulis'] ?></p>
                             <p>Penerbit : <?= $koleksi['Penerbit'] ?></p>
                             <p>Terbit : <?= $koleksi['Tahun_Terbit'] ?></p>
-                            <p>Terbit : <?= date('Y-m-d', strtotime($koleksi['tgl_peminjaman'])) ?></p>
-                            <p>Terbit : <?= $koleksi['tgl_pengembalian'] ?></p>
+                            <p>Tanggal_peminjaman : <?= date('Y-m-d', strtotime($koleksi['tgl_peminjaman'])) ?></p>
+                            <p>Tanggal_pengmbalian : <?= $koleksi['tgl_pengembalian'] ?></p>
                     </div>
                 </div>
             <?php endforeach ?>

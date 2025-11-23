@@ -85,7 +85,8 @@ main{
 	text-decoration: none;
 	color: #6C757D;
 	font-weight: 500;
-	padding: 15px 30px;
+    font-size: 15px;
+	padding: 18px 30px;
 	border-radius: 10px;
 	margin-bottom: 15px;
 	transition: 0.3s;
@@ -279,6 +280,7 @@ button.dipinjam:hover {
     height: 300px;
     /* border-radius: 20px; */
     border-radius: 10px 0 0 10px;
+    object-fit: cover;
 }
 
 .menu_dafbuk{
@@ -343,58 +345,9 @@ button.dipinjam:hover {
     margin-top: 30px;
 }
 
-.box{
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 550px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.box h1{
-    margin-bottom: 20px;
-}
-.box form{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.form-group{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.box label{
-    width: 150px;
-    font-weight: 600;
-    text-align: left; 
-}
-
-.box input{
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #e5e4ff;
-    background-color: #e5e4ff;
+.updel-buku{
     width: 100%;
-}
-.box button{
-    padding: 12px 20px;
-    background-color: #6c63ff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    width: 150px;
-    margin: 0 auto;
-}
-.input select{
-    padding: 10px 90px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background-color:  #d6d1ec;
-    cursor: pointer; 
-    font-weight: 600;
-    color: #6C757D;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
 }

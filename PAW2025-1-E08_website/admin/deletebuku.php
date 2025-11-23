@@ -31,7 +31,7 @@
     <h1>Yakin?</h1>
     <form action="" method="POST">
         <button name="delete" value="hapus">Hapus</button>
-        <button name="delete" value="cancel">Cancel</button>
+        <button name="delete" value="cancel" >Cancel</button>
     </form>
     
 </body>

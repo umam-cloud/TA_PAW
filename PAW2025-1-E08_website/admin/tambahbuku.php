@@ -7,52 +7,59 @@
         exit;
     }
 
-    $judul = $penulis = $penerbit = $tahun_terbit = '';
-    $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit = '';
+    $judul = $penulis = $penerbit = $tahun_terbit = $cover='';
+    $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit =  $error_cover = '';
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $judul = $_POST['judul'];
         $penulis = $_POST['penulis'];
         $penerbit = $_POST['penerbit'];
         $tahun_terbit = $_POST['tahun_terbit'];
-        $answer = TRUE;
-        
-        if(!wajib_isi($judul)){
-            $error_judul = 'Wajib di isi';
-            $answer = FALSE;
-        }elseif(!Alfanumerik($judul)){
-            $error_judul = 'Judul Tidak Valid';
-            $answer = FALSE;
-        }
-        
-        if(!wajib_isi($penulis)){
-            $answer = FALSE;
-            $error_penulis = "Wajib di isi";
-        }elseif(!Alfabet($penulis)){
-            $error_penulis = "Penulis Hanya Alfabet";
-            $answer = FALSE;
-        }
-        
-        if(!wajib_isi($penerbit)){
-            $error_penerbit = 'Wajib di isi';
-            $answer = FALSE;
-        }elseif(!Alfanumerik($penerbit)){
-            $error_penerbit = 'Nama Penerbit Tidak Valid';
-            $answer = FALSE;
-        }
-        
-        if(!wajib_isi($tahun_terbit)){
-            $error_tahun_terbit = 'Wajib di isi';
-            $answer = FALSE;
-        }elseif(!Numerik($tahun_terbit)){
-            $error_tahun_terbit = 'Tahun Terbit Tidak Valid';
-            $answer = FALSE;
-        }
+    
+        if (isset($_POST['btn'])) {
+            $succses = TRUE;
+            var_dump($_FILES);
+            if(empty($_FILES['cover']['name'])){
+                $error_cover ='wajib di isi';
+                $succses = FALSE;
+            }
 
-        if ($answer == TRUE) {
-            addBuku($_POST);
-            header('location:'.BASE_URL.'/admin/daftarbuku.php');
-        }
+            if(!wajib_isi($judul)){
+                $error_judul = 'Wajib di isi';
+                $succses = FALSE;
+            }elseif(!Alfanumerik($judul)){
+                $error_judul = 'Judul Tidak Valid';
+                $succses = FALSE;
+            }
+            
+            if(!wajib_isi($penulis)){
+                $succses = FALSE;
+                $error_penulis = "Wajib di isi";
+            }elseif(!Alfabet($penulis)){
+                $error_penulis = "Penulis Hanya Alfabet";
+                $succses = FALSE;
+            }
+            
+            if(!wajib_isi($penerbit)){
+                $error_penerbit = 'Wajib di isi';
+                $succses = FALSE;
+            }elseif(!Alfanumerik($penerbit)){
+                $error_penerbit = 'Nama Penerbit Tidak Valid';
+                $succses = FALSE;
+            }
+            
+            if(!wajib_isi($tahun_terbit)){
+                $error_tahun_terbit = 'Wajib di isi';
+                $succses = FALSE;
+            }elseif(!Numerik($tahun_terbit)){
+                $error_tahun_terbit = 'Tahun Terbit Tidak Valid';
+                $succses = FALSE;
+            }
 
+            if ($succses == TRUE) {
+                addBuku($_POST);
+                header('location:'.BASE_URL.'/admin/daftarbuku.php');
+            }
+        }
     }
 ?>
 
@@ -61,39 +68,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= BASE_URL.'/assets/css/style.css'?>">
+    <link rel="stylesheet" href="<?= BASE_URL.'/assets/css/form.css'?>">
     <title>Document</title>
 </head>
 <body>
     <main>
         <div class="box">
             <h1>Tambah Buku</h1>
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label>Judul:</label>
-                    <input type="text" name="judul">
+                    <label>Cover Buku:</label>
+                    <input type="file" name="cover">
                 </div>
-                <font><?=$error_judul?></font>
+                <font class="error"><?=$error_cover?></font>
 
                 <div class="form-group">
-                    <label>Penulis:</label>
-                    <input type="text" name="penulis">
+                    <label>Judul:</label>
+                    <input type="text" name="judul" value="<?=$judul?>">
                 </div>
-                <font><?=$error_penulis?></font>
+                <font class="error"><?=$error_judul?></font>
+                
+                <div class="form-group">
+                    <label>Penulis:</label>
+                    <input type="text" name="penulis"  value="<?=$penulis?>">
+                </div>
+                <font class="error"><?=$error_penulis?></font>
 
                 <div class="form-group">
                     <label>Penerbit:</label>
-                    <input type="text" name="penerbit">
+                    <input type="text" name="penerbit"  value="<?=$penerbit?>">
                 </div>
-                <font><?=$error_penerbit?></font>
+                <font class="error"><?=$error_penerbit?></font>
 
                 <div class="form-group">
                     <label>Tahun Terbit:</label>
-                    <input type="text" name="tahun_terbit">
+                    <input type="text" name="tahun_terbit"  value="<?=$tahun_terbit?>">
                 </div>
-                <font><?=$error_tahun_terbit?></font>
-                <button name="submit">Tambah</button>
-                <a href="<?= BASE_URL.'/admin/daftarbuku.php' ?>"><button name="submit">Kembali</button></a>
+                <font class="error"><?=$error_tahun_terbit?></font>
+                <div class="btn">
+                    <button name="btn">Tambah</button>
+                    <a href="<?= BASE_URL.'/admin/daftarbuku.php' ?>"><button name="btn" value='batal'>Kembali</button></a>
+                </div>
             </form>
         </div>
     </main>
