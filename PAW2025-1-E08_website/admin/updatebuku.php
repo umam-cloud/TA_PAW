@@ -12,52 +12,58 @@
     // $judul = $penulis = $penerbit = $tahun_terbit = '';
     $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit = $error_cover='';
     
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if ($_SERVER['REQUEST_METHOD'] == "POST"){
         $judul = $_POST['judul'];
         $penerbit = $_POST['penerbit'];
         $penulis = $_POST['penulis'];
         $tahun_terbit = $_POST['tahun_terbit'];
-        $answer = True;
-    
-        if(!wajib_isi($judul)){
-            $error_judul = 'Wajib di isi';
-            $answer = FALSE;
-        }elseif(!Alfanumerik($judul)){
-            $error_judul = 'Judul Tidak Valid';
-            $answer = FALSE;
-        }
-        
-        if(!wajib_isi($penulis)){
-            $answer = FALSE;
-            $error_penulis = "Wajib di isi";
-        }elseif(!Alfabet($penulis)){
-            $error_penulis = "Penulis Hanya Alfabet";
-            $answer = FALSE;
-        }
-        
-        if(!wajib_isi($penerbit)){
-            $error_penerbit = 'Wajib di isi';
-            $answer = FALSE;
-        }elseif(!Alfanumerik($penerbit)){
-            $error_penerbit = 'Nama Penerbit Tidak Valid';
-            $answer = FALSE;
-        }
-        
-        if(!wajib_isi($tahun_terbit)){
-            $error_tahun_terbit = 'Wajib di isi';
-            $answer = FALSE;
-        }elseif(!Numerik($tahun_terbit)){
-            $error_tahun_terbit = 'Tahun Terbit Tidak Valid';
-            $answer = FALSE;
-        }
 
-        if ($answer == TRUE) {
-            if (!empty($_FILES['cover']['name'])) {
-                    updateCover($_GET['id_buku']);
+        if (isset($_POST['btn'])) {
+            if ($_POST['btn'] == 'simpan') {
+                $answer = True;
+                if(!wajib_isi($judul)){
+                    $error_judul = 'Wajib di isi';
+                    $answer = FALSE;
+                }elseif(!Alfanumerik($judul)){
+                    $error_judul = 'Judul Tidak Valid';
+                    $answer = FALSE;
+                }
+                
+                if(!wajib_isi($penulis)){
+                    $answer = FALSE;
+                    $error_penulis = "Wajib di isi";
+                }elseif(!Alfabet($penulis)){
+                    $error_penulis = "Penulis Hanya Alfabet";
+                    $answer = FALSE;
+                }
+                
+                if(!wajib_isi($penerbit)){
+                    $error_penerbit = 'Wajib di isi';
+                    $answer = FALSE;
+                }elseif(!Alfanumerik($penerbit)){
+                    $error_penerbit = 'Nama Penerbit Tidak Valid';
+                    $answer = FALSE;
+                }
+                
+                if(!wajib_isi($tahun_terbit)){
+                    $error_tahun_terbit = 'Wajib di isi';
+                    $answer = FALSE;
+                }elseif(!Numerik($tahun_terbit)){
+                    $error_tahun_terbit = 'Tahun Terbit Tidak Valid';
+                    $answer = FALSE;
+                }
+        
+                if ($answer == TRUE) {
+                    if (!empty($_FILES['cover']['name'])) {
+                            updateCover($_GET['id_buku']);
+                    }
+                    updateBuku($_GET['id_buku'],$_POST);
+                    header('location:'.BASE_URL.'/admin/daftarbuku.php');
+                }  
+            }elseif($_POST['btn'] == 'kembali'){
+                 header('location:'.BASE_URL.'/admin/daftarbuku.php');
             }
-            updateBuku($_GET['id_buku'],$_POST);
-            header('location:'.BASE_URL.'/admin/daftarbuku.php');
-        }  
+        }
     }
 
 
@@ -108,8 +114,8 @@
                 </div>
                 <font class="error"><?=$error_tahun_terbit?></font>
                 <div class="btn">
-                    <button type='submit'>simpan</button>
-                    <a href="<?= BASE_URL.'/admin/daftarbuku.php' ?>"><button>Kembali</button></a>
+                    <button name="btn" value='simpan'>Simpan</button>
+                    <button name="btn" value='kembali'>Kembali</button>
                 </div>
             </form>
         </div>

@@ -7,6 +7,11 @@
 
     $active = 'koleksi';
     $koleksi_buku = koleksi();
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        updateStatusPeminjaman($_POST['kembalikan']);
+        header('Location: koleksi.php');
+        exit();
+    }
     // var_dump($buku);
 ?>
 
@@ -29,16 +34,31 @@
                 <div class="dafbuk-koleksi">
                     <img src="<?= BASE_URL.'/assets/covbuk/'.$koleksi['Cover'] ?>" alt="" class="cover">
                     <div class="buku">
-                            <h3><?= $koleksi['Judul'] ?></h3>
-                            <p>Penulis : <?= $koleksi['Penulis'] ?></p>
-                            <p>Penerbit : <?= $koleksi['Penerbit'] ?></p>
-                            <p>Terbit : <?= $koleksi['Tahun_Terbit'] ?></p>
-                            <p>Tanggal_peminjaman : <?= date('Y-m-d', strtotime($koleksi['tgl_peminjaman'])) ?></p>
-                            <p>Tanggal_pengmbalian : <?= $koleksi['tgl_pengembalian'] ?></p>
+                        <h3><?= $koleksi['Judul'] ?></h3>
+                        <p>Penulis : <?= $koleksi['Penulis'] ?></p>
+                        <p>Penerbit : <?= $koleksi['Penerbit'] ?></p>
+                        <p>Terbit : <?= $koleksi['Tahun_Terbit'] ?></p>
+                        <p>Tanggal_peminjaman : <?= date('Y-m-d', strtotime($koleksi['tgl_peminjaman'])) ?></p>
+                        <p>Tanggal_pengmbalian : <?= $koleksi['tgl_pengembalian'] ?></p>
+                    </div>
+                    <div class="status-koleksi">
+                        <?php if ($koleksi['status'] === 'Dipinjam' ):?>
+                            <form method='POST'>
+                                <button name='kembalikan' value='<?= $koleksi['id_peminjaman'] ?>'>Kembalikan</button>
+                            </form>
+                        <?php elseif ($koleksi['status'] === 'Diproses'): ?>
+                            <div class="status">
+                                <p class='proses'>proses</p>
+                            </div>
+                        <?php elseif ($koleksi['status'] === 'Dikembalikan'): ?>
+                            <div class="status">
+                                <p class='dikembalikan'>Dikembalikan</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach ?>
         </div>
-    </main>
+    </main>
     </body>
 </html>

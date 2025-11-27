@@ -126,7 +126,7 @@
                             <font class="error"><?= $error_username?></font>
                         </div>
                         <div class="input">
-                            <input type="text"  placeholder="password" name="password">
+                            <input type="text"  placeholder="password" name="password" class="pass">
                             <font class="error"><?= $error_password?></font>
                         </div>
                         <div class="input">

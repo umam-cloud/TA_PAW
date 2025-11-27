@@ -24,7 +24,7 @@ function addUser(array $data){
 	VALUE (:username, :pass, :email, :no_telp, :jenkel, :tgl_lahir, :alamat)');
 	$stmnt->execute([
 		':username' => $data['username'],
-		':pass' => $data['password'],
+		':pass' => hash('sha256',$data['password']),
 		':email' => $data['email'],
 		':no_telp' => $data['tlp'],
 		':jenkel' => $data['jenkel'],
@@ -60,7 +60,7 @@ function cekAkun(array $data){
     $stmnt = DBH->prepare('SELECT Username FROM pemustaka WHERE Username= :username and Password = :password UNION SELECT Username FROM admin WHERE Username= :username and Password = :password');
     $stmnt->execute([
         ':username' => $data['username'],
-        ':password' => $data['password'],
+        ':password' =>  hash('sha256',$data['password']),
     ]);
 
     $rows = $stmnt->fetchAll();
@@ -74,7 +74,7 @@ function login(array $data){
 	$stmnt = DBH->prepare('SELECT id_pemustaka AS id,Username,"pemustaka" AS role FROM pemustaka WHERE Username=:username and Password =:pass UNION SELECT id_admin AS id,Username,"admin" AS role FROM admin WHERE Username=:username and Password =:pass');
 	$stmnt->execute([
 		':username' => $data['username'],
-		':pass' => $data['password'],
+		':pass' =>  hash('sha256',$data['password']),
 	]);
 	$user = $stmnt->fetch();
 	$_SESSION['login'] = TRUE;
@@ -182,6 +182,7 @@ function daftarPeminjaman(){
 	$stmnt = DBH->prepare(
 	'SELECT 
     peminjaman.id_peminjaman,
+	peminjaman.status,
 	buku.id_buku,
     buku.Judul AS judul_buku,
     pemustaka.Username AS username_pemustaka,
@@ -192,7 +193,7 @@ function daftarPeminjaman(){
     ON peminjaman.id_buku = buku.id_buku
 	INNER JOIN pemustaka 
     ON peminjaman.id_pemustaka = pemustaka.id_pemustaka
-	WHERE buku.Status = "permintaan";
+	ORDER BY peminjaman.id_peminjaman desc
 	');
 	$stmnt->execute();
 	$peminjam = $stmnt->fetchAll();
@@ -231,11 +232,46 @@ function koleksi(){
 		 INNER JOIN pemustaka AS ps
 		 ON ps.id_pemustaka = p.id_pemustaka
 		 WHERE p.id_pemustaka = :id_pemustaka
+		 ORDER BY p.id_peminjaman desc
 		'
 	); 
 	$stmnt->execute([':id_pemustaka' => $id_pemustaka]);
 	$koleksi = $stmnt->fetchAll();
 	return$koleksi;
+}
+
+
+// untuk update stok buku ketika pemustaka meminjam buku dan mengupdate status di daftar peminjaman menjadi Dipinjam
+function updateStokBuku(int $id) {
+	$stmnt = DBH->prepare("UPDATE buku SET Stok = Stok -1  WHERE id_Buku = :id_buku");
+	$stmnt->execute([
+		':id_buku' => $id,
+	]);
+	$stmnt = DBH->prepare("UPDATE peminjaman set status = 'Dipinjam' WHERE id_Buku = :id_buku");
+	$stmnt->execute([
+		':id_buku' => $id,
+	]);
+}
+
+// untuk mengupdate status peminjaman menjadi Diproses ketika pemustaka mengklik button kembalikan
+function updateStatusPeminjaman(int $id){
+	$stmnt = DBH->prepare("UPDATE peminjaman set status = 'Diproses' WHERE id_peminjaman = :id_peminjaman");
+	$stmnt->execute([
+		':id_peminjaman' => $id,
+	]);
+}
+
+// untuk fungsi mengembalikan stok buku dan mengubah status di peminjaman menjadi dikembalikan
+function updatePeminjaman(int $id, $idBuku){
+	$stmnt = DBH->prepare("UPDATE peminjaman set status = 'Dikembalikan' WHERE id_peminjaman = :id_peminjaman");
+	$stmnt->execute([
+		':id_peminjaman' => $id
+	]);
+
+	$stmnt = DBH->prepare("UPDATE buku SET Stok = Stok + 1 WHERE id_buku = :id_buku");
+	$stmnt->execute([
+		':id_buku' => $idBuku
+	]);
 }
 
 

@@ -8,7 +8,7 @@
 
     if(isset($_POST['pinjam'])){
         addPeminjam($_POST['pinjam'], $_SESSION['id_user']);
-        updateStatusBuku($_POST['pinjam'], 'permintaan');
+        updateStokBuku($_POST['pinjam']);
     }
 
     $buku = getBuku();
@@ -29,16 +29,6 @@
         require_once(BASE_PATH."/component/sidebar.php");
     ?>
     <main>
-        <div class="input">
-        <select name="kategori" id="">
-            <option value="">Kategori</option>
-            <option value="dongeng">Fiksi</option>
-            <option value="cerita_rakyat">Non Fiksi</option>
-            <option value="komik">Pendidikan</option>
-            <option value="novel">Hiburan</option>
-        </select>
-        </div>
-
         <div class="menu_dafbuk">
             <?php foreach ($buku as $book):?>
                 <div class="dafbuk">
@@ -48,11 +38,8 @@
                             <p>Penulis : <?= $book['Penulis'] ?></p>
                             <p>Penerbit : <?= $book['Penerbit'] ?></p>
                             <p>Terbit : <?= $book['Tahun_Terbit'] ?></p>
-                            <?php if ($book['Status'] == 'tersedia'):?>
-                                 <form action="" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>'>Pinjam</button></form>
-                            <?php elseif ($book['Status'] == 'permintaan' or $book['Status'] == 'dipinjam'):?>
-                                <a href=""><button class="dipinjam">Dipinjam</button></a>
-                            <?php endif?>
+                            <p>Stok : <?= $book['Stok'] ?></p>
+                            <form action="" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>'>Pinjam</button></form>
                     </div>
                 </div>
             <?php endforeach ?>

@@ -16,47 +16,50 @@
         $tahun_terbit = $_POST['tahun_terbit'];
     
         if (isset($_POST['btn'])) {
-            $succses = TRUE;
-            var_dump($_FILES);
-            if(empty($_FILES['cover']['name'])){
-                $error_cover ='wajib di isi';
-                $succses = FALSE;
-            }
-
-            if(!wajib_isi($judul)){
-                $error_judul = 'Wajib di isi';
-                $succses = FALSE;
-            }elseif(!Alfanumerik($judul)){
-                $error_judul = 'Judul Tidak Valid';
-                $succses = FALSE;
-            }
-            
-            if(!wajib_isi($penulis)){
-                $succses = FALSE;
-                $error_penulis = "Wajib di isi";
-            }elseif(!Alfabet($penulis)){
-                $error_penulis = "Penulis Hanya Alfabet";
-                $succses = FALSE;
-            }
-            
-            if(!wajib_isi($penerbit)){
-                $error_penerbit = 'Wajib di isi';
-                $succses = FALSE;
-            }elseif(!Alfanumerik($penerbit)){
-                $error_penerbit = 'Nama Penerbit Tidak Valid';
-                $succses = FALSE;
-            }
-            
-            if(!wajib_isi($tahun_terbit)){
-                $error_tahun_terbit = 'Wajib di isi';
-                $succses = FALSE;
-            }elseif(!Numerik($tahun_terbit)){
-                $error_tahun_terbit = 'Tahun Terbit Tidak Valid';
-                $succses = FALSE;
-            }
-
-            if ($succses == TRUE) {
-                addBuku($_POST);
+            if ($_POST['btn'] == 'tambah') {
+                $succses = TRUE;
+                if(empty($_FILES['cover']['name'])){
+                    $error_cover ='wajib di isi';
+                    $succses = FALSE;
+                }
+    
+                if(!wajib_isi($judul)){
+                    $error_judul = 'Wajib di isi';
+                    $succses = FALSE;
+                }elseif(!Alfanumerik($judul)){
+                    $error_judul = 'Judul Tidak Valid';
+                    $succses = FALSE;
+                }
+                
+                if(!wajib_isi($penulis)){
+                    $succses = FALSE;
+                    $error_penulis = "Wajib di isi";
+                }elseif(!Alfabet($penulis)){
+                    $error_penulis = "Penulis Hanya Alfabet";
+                    $succses = FALSE;
+                }
+                
+                if(!wajib_isi($penerbit)){
+                    $error_penerbit = 'Wajib di isi';
+                    $succses = FALSE;
+                }elseif(!Alfanumerik($penerbit)){
+                    $error_penerbit = 'Nama Penerbit Tidak Valid';
+                    $succses = FALSE;
+                }
+                
+                if(!wajib_isi($tahun_terbit)){
+                    $error_tahun_terbit = 'Wajib di isi';
+                    $succses = FALSE;
+                }elseif(!Numerik($tahun_terbit)){
+                    $error_tahun_terbit = 'Tahun Terbit Tidak Valid';
+                    $succses = FALSE;
+                }
+    
+                if ($succses == TRUE) {
+                    addBuku($_POST);
+                    header('location:'.BASE_URL.'/admin/daftarbuku.php');
+                }
+            }elseif ($_POST['btn'] == 'kembali') {
                 header('location:'.BASE_URL.'/admin/daftarbuku.php');
             }
         }
@@ -106,8 +109,8 @@
                 </div>
                 <font class="error"><?=$error_tahun_terbit?></font>
                 <div class="btn">
-                    <button name="btn">Tambah</button>
-                    <a href="<?= BASE_URL.'/admin/daftarbuku.php' ?>"><button name="btn" value='batal'>Kembali</button></a>
+                    <button name="btn" value='tambah'>Tambah</button>
+                    <button name="btn" value='kembali'>Kembali</button>
                 </div>
             </form>
         </div>

@@ -9,6 +9,12 @@
     $hari_ini = date('Y-m-d');
     $peminjaman = daftarPeminjaman();
 
+    if (isset($_POST['terima'])) {
+        updatePeminjaman($_POST['terima'],$_POST['buku']);
+        header('Location: daftarpeminjaman.php');
+        exit();
+    }
+
     // if (isset($_POST['btn'])) {
     //     $btn = $_POST['btn']
     //     if ($btn == 'terima') {
@@ -32,15 +38,14 @@
     require_once(BASE_PATH."/component/sidebar.php");
     ?>
     <main>    
-        <h1>Daftar Peminjam</h1>
         <table border='1'>
         <tr>
             <th>Judul Buku</th>
             <th>Nama Peminjam</th>
             <th>Tanggal Peminjaman</th>
             <th>Tanggal Pemngembalian</th>
+            <th>Status</th>
             <th>Aksi</th>
-            <th></th>
         </tr>
         <?php foreach ($peminjaman as $peminjam):?>
             <?php if ($hari_ini>$peminjam['tgl_pengembalian'] ):?>
@@ -51,10 +56,13 @@
                     <td><?= $peminjam['username_pemustaka'] ?></td>
                     <td><?= date('Y-m-d', strtotime($peminjam['tgl_peminjaman'])) ?></td>
                     <td><?= $peminjam['tgl_pengembalian'] ?></td>
-                    <form action="" method="POST">
-                        <td><button name="btn" value="terima">Terima</button></td>
-                        <td><button name="btn" value="tolak">Tolak</button></td>
-                    </form>
+                    <td><?= $peminjam['status'] ?></td>
+                    <?php if ($peminjam['status'] === 'Diproses' ):?>
+                        <form method='POST'><td>
+                            <input type="hidden" value= '<?= $peminjam ['id_buku']?>' name="buku">
+                            <button name='terima' value='<?= $peminjam['id_peminjaman'] ?>'>Terima</button>
+                        </td></form>
+                    <?php endif; ?>
                 </tr>
             <?php endif?>
         <?php endforeach?>
