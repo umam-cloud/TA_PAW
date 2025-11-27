@@ -1,6 +1,6 @@
-<section class="nav">
+<div class="nav">
 	<div class="nav-container">
-		<div class="logo"><img src="<?= BASE_URL .'./assets/img/logo.png'?>">PerpusKids</div>
+		<div class="logo"><img src="<?= BASE_URL .'/assets/img/logo.png'?>" alt="">PerpusKids</div>
 		<div class="nav-button">
 			<?php if (!isset($_SESSION['login'])):?>
 				<div class="auth-links">
@@ -18,4 +18,4 @@
 			<?php endif?>		
 		</div>
 	</div>
-</section>
+</div>

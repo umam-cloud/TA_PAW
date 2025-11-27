@@ -42,9 +42,11 @@ main{
 .container-form .error{
     color: red;
     font-size: 12px;
+    margin-bottom: -10px;
 }
 
 .container-form .header-form{
+    
     display: flex;
     align-items: center;
 }
@@ -78,8 +80,8 @@ main{
     display: flex;
     /* background-color: antiquewhite; */
     flex-direction: column;
-    height: 400px;
     gap: 10px;
+    margin-top: -50px;
     justify-content: center;
     width:50%;
     align-items: start;
@@ -120,9 +122,10 @@ main{
 }
 
 .container-form .box-form .form .ttl{
+    width: 450px;
     margin-top: 10px;
     display: flex;
-    gap: 23px;
+    gap: 20px;
 }
 
 .container-form .box-form .form label{
@@ -130,7 +133,9 @@ main{
     color: #6c757d;
 }
 
-.container-form .box-form .form .ttl select{
+.container-form .box-form .form .ttl input{
+    width: 100px;
+    height: 20px;
     padding: 5px 25px;
     border-radius: 5px;
     background-color: #e5e4ff;

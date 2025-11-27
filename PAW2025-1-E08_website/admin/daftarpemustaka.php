@@ -25,7 +25,7 @@
     require_once(BASE_PATH."/component/sidebar.php");
     ?>
     <main>
-        <table border='1'>
+        <table>
             <tr>
                 <th>Username</th>
                 <th>Email</th>

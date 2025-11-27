@@ -91,7 +91,7 @@ function getBuku(){
 }
 
 function getBukuTerbaru(){
-	$stmnt = DBH->prepare('SELECT * FROM buku ORDER BY `Tahun_Terbit` DESC LIMIT 6');
+	$stmnt = DBH->prepare('SELECT * FROM buku ORDER BY id_buku DESC LIMIT 6');
 	$stmnt->execute();
 	$buku = $stmnt->fetchAll();
 	return $buku;
@@ -110,19 +110,20 @@ function deleteBuku(int $id){
 }
 
 function addBuku(array $data){
-	$stmt = DBH->prepare("INSERT INTO Buku (Judul, Penulis, Penerbit, Tahun_Terbit, Cover) VALUE (:Judul, :Penulis, :Penerbit, :Tahun_Terbit, :Cover)");
-	$namaFile = time() . "_" . $_FILES['cover']['name'];
-	$tmpFile = $_FILES['cover']['tmp_name'];
+	$stmt = DBH->prepare("INSERT INTO buku (Judul, Penulis, Penerbit, Tahun_Terbit, Stok ,Cover) VALUE (:Judul, :Penulis, :Penerbit, :Tahun_Terbit, :stok , :Cover)");
+	$namaFile=time()."_".$_FILES['cover']['name'];
+	$tmpFile=$_FILES['cover']['tmp_name'];
 	$stmt->execute([
 	':Judul' => $data ['judul'],
 	':Penulis' => $data ['penulis'],
 	':Penerbit' => $data ['penerbit'],
 	':Tahun_Terbit' => $data ['tahun_terbit'],
+    ':stok' => $data['stok'],
 	':Cover' => $namaFile,
 	]);
 
 	#menambahkan foto baru
-	move_uploaded_file($tmpFile, BASE_PATH."/assets/covbuk/" . $namaFile);
+	move_uploaded_file($tmpFile, BASE_PATH."/assets/covbuk/".$namaFile);
 }
 
 function updateBuku(int $id, array $data) {
@@ -160,15 +161,6 @@ function updateCover(int $id){
 
 // ==== sistem peminjaman ======
 
-function updateStatusBuku(int $id, string $status) {
-	$stmnt = DBH->prepare("UPDATE buku SET Status = :status WHERE ID_Buku = :id_buku");
-	$stmnt->execute([
-		':status' => $status,
-		':id_buku' => $id,
-	]);
-}
-
-
 function addPeminjam(int $buku, int $pemustaka){
 	$stmt = DBH->prepare("INSERT INTO peminjaman (id_buku, id_pemustaka, tgl_pengembalian) VALUE (:id_buku, :id_pemustaka, :tgl_pengembalian)");
 	$stmt->execute([
@@ -193,7 +185,7 @@ function daftarPeminjaman(){
     ON peminjaman.id_buku = buku.id_buku
 	INNER JOIN pemustaka 
     ON peminjaman.id_pemustaka = pemustaka.id_pemustaka
-	ORDER BY peminjaman.id_peminjaman desc
+    ORDER BY peminjaman.id_peminjaman desc
 	');
 	$stmnt->execute();
 	$peminjam = $stmnt->fetchAll();
@@ -244,10 +236,6 @@ function koleksi(){
 // untuk update stok buku ketika pemustaka meminjam buku dan mengupdate status di daftar peminjaman menjadi Dipinjam
 function updateStokBuku(int $id) {
 	$stmnt = DBH->prepare("UPDATE buku SET Stok = Stok -1  WHERE id_Buku = :id_buku");
-	$stmnt->execute([
-		':id_buku' => $id,
-	]);
-	$stmnt = DBH->prepare("UPDATE peminjaman set status = 'Dipinjam' WHERE id_Buku = :id_buku");
 	$stmnt->execute([
 		':id_buku' => $id,
 	]);

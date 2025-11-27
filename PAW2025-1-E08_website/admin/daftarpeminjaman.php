@@ -38,7 +38,7 @@
     require_once(BASE_PATH."/component/sidebar.php");
     ?>
     <main>    
-        <table border='1'>
+        <table >
         <tr>
             <th>Judul Buku</th>
             <th>Nama Peminjam</th>
@@ -58,7 +58,7 @@
                     <td><?= $peminjam['tgl_pengembalian'] ?></td>
                     <td><?= $peminjam['status'] ?></td>
                     <?php if ($peminjam['status'] === 'Diproses' ):?>
-                        <form method='POST'><td>
+                        <form action="<?= BASE_URL.'/admin/daftarpeminjaman.php'?>" method='POST'><td>
                             <input type="hidden" value= '<?= $peminjam ['id_buku']?>' name="buku">
                             <button name='terima' value='<?= $peminjam['id_peminjaman'] ?>'>Terima</button>
                         </td></form>

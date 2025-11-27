@@ -55,4 +55,8 @@ function tanggal($tahun, $bulan, $tanggal){
     }
 }
 
+function stok($data){
+    return $data <= 5;
+}
+
 ?>

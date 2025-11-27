@@ -25,14 +25,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL.'/assets/css/form.css'?>">
     <title>Document</title>
 </head>
 <body>
-    <h1>Yakin?</h1>
-    <form action="" method="POST">
-        <button name="delete" value="hapus">Hapus</button>
-        <button name="delete" value="cancel" >Cancel</button>
-    </form>
+    <main>
+        <div class="container-validasi">
+        <h1>Yakin?</h1>
+        <form method="POST">
+            <button name="delete" value="hapus">Hapus</button>
+            <button name="delete" value="cancel" >Cancel</button>
+        </form>
+        </div>
+    </main>
     
 </body>
 </html>

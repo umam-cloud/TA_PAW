@@ -1,4 +1,8 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     require_once('../base.php');
     require_once(BASE_PATH."/database.php");
 
@@ -7,16 +11,17 @@
         exit;
     }
 
-    $judul = $penulis = $penerbit = $tahun_terbit = $cover='';
-    $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit =  $error_cover = '';
+    $judul = $penulis = $penerbit = $tahun_terbit = $cover= $stok ='';
+    $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit =  $error_cover = $error_stok ='';
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $judul = $_POST['judul'];
         $penulis = $_POST['penulis'];
         $penerbit = $_POST['penerbit'];
         $tahun_terbit = $_POST['tahun_terbit'];
+        $stok = $_POST['stok'];
     
         if (isset($_POST['btn'])) {
-            if ($_POST['btn'] == 'tambah') {
+            if ($_POST['btn']=='tambah') {
                 $succses = TRUE;
                 if(empty($_FILES['cover']['name'])){
                     $error_cover ='wajib di isi';
@@ -54,13 +59,23 @@
                     $error_tahun_terbit = 'Tahun Terbit Tidak Valid';
                     $succses = FALSE;
                 }
+                
+                if(!wajib_isi($stok)){
+                    $error_stok = 'Wajib di isi';
+                    $succses = FALSE;
+                }elseif(!stok($stok)){
+                    $error_stok = 'Stok tidak boleh lebih dari 5';
+                    $succses = FALSE;
+                }
     
                 if ($succses == TRUE) {
                     addBuku($_POST);
                     header('location:'.BASE_URL.'/admin/daftarbuku.php');
+                    exit();
                 }
             }elseif ($_POST['btn'] == 'kembali') {
                 header('location:'.BASE_URL.'/admin/daftarbuku.php');
+                exit();
             }
         }
     }
@@ -78,36 +93,43 @@
     <main>
         <div class="box">
             <h1>Tambah Buku</h1>
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Cover Buku:</label>
                     <input type="file" name="cover">
                 </div>
-                <font class="error"><?=$error_cover?></font>
+                <div class="error"><?=$error_cover?></div>
 
                 <div class="form-group">
                     <label>Judul:</label>
                     <input type="text" name="judul" value="<?=$judul?>">
                 </div>
-                <font class="error"><?=$error_judul?></font>
+                <div class="error"><?=$error_judul?></div>
                 
                 <div class="form-group">
                     <label>Penulis:</label>
                     <input type="text" name="penulis"  value="<?=$penulis?>">
                 </div>
-                <font class="error"><?=$error_penulis?></font>
+                <div class="error"><?=$error_penulis?></div>
 
                 <div class="form-group">
                     <label>Penerbit:</label>
                     <input type="text" name="penerbit"  value="<?=$penerbit?>">
                 </div>
-                <font class="error"><?=$error_penerbit?></font>
+                <div class="error"><?=$error_penerbit?></div>
 
                 <div class="form-group">
                     <label>Tahun Terbit:</label>
                     <input type="text" name="tahun_terbit"  value="<?=$tahun_terbit?>">
                 </div>
-                <font class="error"><?=$error_tahun_terbit?></font>
+                <div class="error"><?=$error_tahun_terbit?></div>
+                
+                <div class="form-group">
+                    <label>Stok:</label>
+                    <input type="text" name="stok"  value="<?=$stok?>">
+                </div>
+                <div class="error"><?=$error_stok?></div>
+                
                 <div class="btn">
                     <button name="btn" value='tambah'>Tambah</button>
                     <button name="btn" value='kembali'>Kembali</button>

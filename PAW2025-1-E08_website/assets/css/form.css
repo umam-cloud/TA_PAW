@@ -80,3 +80,45 @@ body{
     font-size: 12px;
     margin-left: 25%;
 }
+
+.container-validasi {
+    background: white;
+    padding: 25px 35px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,50,0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.container-validasi h1 {
+    color: #1a4dab;
+    margin-bottom: 20px;
+}
+
+.container-validasi form button {
+    padding: 10px 25px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.container-validasi form button [value="hapus"] {
+    background: #1a73e8;
+    color: rgb(0, 0, 0);
+}
+
+.container-validasi form button[value="hapus"]:hover {
+    background: #1059b3;
+}
+
+.container-validasi form button[value="cancel"] {
+    background: #e4edff;
+    color: #000000;
+}
+
+.container-validasi form button[value="cancel"]:hover {
+   background: #1059b3;
+}

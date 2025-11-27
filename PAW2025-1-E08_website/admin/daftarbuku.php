@@ -25,8 +25,8 @@
 
     ?>
     <main>
-        <a href="<?=BASE_URL.'/admin/tambahbuku.php'?>"><button>Tambah</button></a>
-        <table border='1'>
+        <a href="<?=BASE_URL.'/admin/tambahbuku.php'?>" class="btn-tambah">Tambah</a>
+        <table>
             <tr>
                 <th>Judul</th>
                 <th>Penulis</th>
@@ -44,8 +44,8 @@
                     <td><?= $book['Stok'] ?></td>
                     <td>
                         <div class="updel-buku">
-                            <a href="deletebuku.php ? id_buku=<?= $book['id_buku']?>"><button>Hapus</button></a>
-                            <a href="updatebuku.php ? id_buku=<?= $book['id_buku']?>" ><button >Edit</button></a>
+                            <a href="<?=BASE_URL.'/admin/deletebuku.php'?>?id_buku=<?= $book['id_buku']?>" class="btn">Hapus</a>
+                            <a href="<?=BASE_URL.'/admin/updatebuku.php'?>?id_buku=<?= $book['id_buku']?>" class="btn">Edit</a>
                         </div>
                     </td>
                 </tr>

@@ -16,14 +16,14 @@
     <div>
       <div class="menu">
         <?php if (!isset($_SESSION['role']) or $_SESSION['role']=='pemustaka'):?>
-          <a href="<?= BASE_URL .'/index.php'?>" class="<?= ($active == 'beranda') ? 'active' : '' ?>"><img src="<?= BASE_URL .'./assets/img/home.png'?>">Beranda</a>
-          <a href="<?= BASE_URL .'/pemustaka/daftarbuku.php'?>" class='<?= ($active == 'dafbuk') ? 'active' : '' ?>'><img src="<?= BASE_URL .'./assets/img/daftar_buku.png'?>">Daftar Buku</a>
-          <a href="<?= BASE_URL .'/pemustaka/koleksi.php'?>" class='<?= ($active == 'koleksi') ? 'active' : '' ?>'><img src="<?= BASE_URL .'/assets/img/koleksi.png'?>">Koleksi</a>
+          <a href="<?= BASE_URL .'/index.php'?>" class="<?= ($active == 'beranda') ? 'active' : '' ?>"><img src="<?= BASE_URL .'/assets/img/home.png'?>" alt="">Beranda</a>
+          <a href="<?= BASE_URL .'/pemustaka/daftarbuku.php'?>" class='<?= ($active == 'dafbuk') ? 'active' : '' ?>'><img src="<?= BASE_URL .'/assets/img/daftar_buku.png'?>" alt="">Daftar Buku</a>
+          <a href="<?= BASE_URL .'/pemustaka/koleksi.php'?>" class='<?= ($active == 'koleksi') ? 'active' : '' ?>'><img src="<?= BASE_URL .'/assets/img/koleksi.png'?>" alt="">Koleksi</a>
         <?php elseif ($_SESSION['role']=='admin'):?>
-          <a href="<?= BASE_URL .'/index.php'?>" class="<?= ($active == 'beranda') ? 'active' : '' ?>"><img src="<?= BASE_URL .'./assets/img/home.png'?>"> Beranda</a>
-          <a href="<?= BASE_URL .'/admin/daftarbuku.php'?>" class='<?= ($active == 'dafbuk') ? 'active' : '' ?>'><img src="<?= BASE_URL .'./assets/img/daftar_buku.png'?>"> Daftar Buku</a>
-          <a href="<?= BASE_URL .'/admin/daftarpemustaka.php'?>" class='<?= ($active == 'dafpemus') ? 'active' : '' ?>'><img src="<?= BASE_URL .'/assets/img/daftarPemustaka.png'?>"> Daftar Pemustaka</a>
-          <a href="<?= BASE_URL .'/admin/daftarpeminjaman.php'?>" class='<?= ($active == 'dafpemin') ? 'active' : '' ?>'><img src="<?= BASE_URL .'/assets/img/daftarPeminjaman.png'?>">Daftar Peminjaman</a>
+          <a href="<?= BASE_URL .'/index.php'?>" class="<?= ($active == 'beranda') ? 'active' : '' ?>"><img src="<?= BASE_URL .'/assets/img/home.png'?>" alt=""> Beranda</a>
+          <a href="<?= BASE_URL .'/admin/daftarbuku.php'?>" class='<?= ($active == 'dafbuk') ? 'active' : '' ?>'><img src="<?= BASE_URL .'/assets/img/daftar_buku.png'?>" alt=""> Daftar Buku</a>
+          <a href="<?= BASE_URL .'/admin/daftarpemustaka.php'?>" class='<?= ($active == 'dafpemus') ? 'active' : '' ?>'><img src="<?= BASE_URL .'/assets/img/daftarPemustaka.png'?>" alt=""> Daftar Pemustaka</a>
+          <a href="<?= BASE_URL .'/admin/daftarpeminjaman.php'?>" class='<?= ($active == 'dafpemin') ? 'active' : '' ?>'><img src="<?= BASE_URL .'/assets/img/daftarPeminjaman.png'?>" alt="">Daftar Peminjaman</a>
         <?php endif?>
       </div>
     </div>

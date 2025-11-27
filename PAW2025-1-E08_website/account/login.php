@@ -74,7 +74,7 @@
                         </div>
                         <font class="error"><?= $error_login?></font>
                         <button>login</button>
-                        <font>Don’t have an account? <a href="<?=BASE_URL.'/account/register.php'?>">register</a></font>
+                        <font>Don't have an account? <a href="<?=BASE_URL.'/account/register.php'?>">register</a></font>
                     </form>
                 </div>
             </div>

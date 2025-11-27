@@ -33,28 +33,28 @@
             <div class="container-biodata">
 
                 <div class="biodata">
-                    <font>Username :</font>
+                    <label>Username :</label>
                     <p><?= $dataPemustaka['Username']; ?></p>
                 </div>
                 
                 <div class="biodata">
-                    <font>Email :</font>
+                    <label>Email :</label>
                     <p><?= $dataPemustaka['Email']; ?></p>
                 </div>
                 
                 <div class="biodata">
-                    <font>Nomor Telepon :</font>
+                    <label>Nomor Telepon :</label>
                     <p><?= $dataPemustaka['Nomor_Telpon']; ?></p>
                     
                 </div>
                 
                 <div class="biodata">
-                    <font>Alamat :</font>
+                    <label>Alamat :</label>
                     <p><?= $dataPemustaka['Alamat']; ?></p>
                 </div>
                 <div class="button-holder">
-                    <a href="<?=BASE_URL.'/index.php'?>"><button class="btn cancel">Kembali</button></a>
-                    <a href="<?=BASE_URL.'/pemustaka/editprofile.php'?>"><button class="btn-save">Edit</button></a>
+                    <a href="<?=BASE_URL.'/index.php'?>" class="btn cancel">Kembali</a>
+                   <a href="<?=BASE_URL.'/pemustaka/editprofile.php'?>" class="btn-save">Edit</a>
                 </div>
 
             </div>

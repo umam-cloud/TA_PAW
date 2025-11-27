@@ -85,7 +85,7 @@
         <div class="card">
             <h2 class="title">Edit Profile</h2>
 
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="<?= BASE_URL.'/pemustaka/editprofile.php'?>" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Foto Profile</label>
                     <input type="file" name="profil">
@@ -94,25 +94,25 @@
                 <div class="form-group">
                     <label>Username: </label>
                     <input type="text" name="username" value="<?=$username??$dataPemustaka['Username']; ?>">
-                     <font class="error"><?= $error_username?></font>
+                     <p class="error"><?= $error_username?></p>
                 </div>
 
                 <div class="form-group">
                     <label>Email: </label>
                     <input type="text" name="email" value="<?=$email??$dataPemustaka['Email']; ?>">
-                     <font class="error"><?= $error_email?></font>
+                     <p class="error"><?= $error_email?></p>
                 </div>
 
                 <div class="form-group">
                     <label>No Telepon: </label>
                     <input type="text" name="tlp" value="<?=$nomor??$dataPemustaka['Nomor_Telpon']; ?>">
-                     <font class="error"><?= $error_nomor?></font>
+                     <p class="error"><?= $error_nomor?></p>
                 </div>
 
                 <div class="form-group">
                     <label>Alamat: </label>
                     <textarea name="alamat"><?=$alamat??$dataPemustaka['Alamat']; ?></textarea>
-                    <font class="error"><?= $error_alamat?></font>
+                    <p class="error"><?= $error_alamat?></p>
                 </div>
 
                 <div class="form-btn">

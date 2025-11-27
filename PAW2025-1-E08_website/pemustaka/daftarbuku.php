@@ -24,6 +24,8 @@
     <title>Document</title>
 </head>
 <body>
+
+
     <?php 
         require_once(BASE_PATH."/component/nav.php");
         require_once(BASE_PATH."/component/sidebar.php");
@@ -39,7 +41,7 @@
                             <p>Penerbit : <?= $book['Penerbit'] ?></p>
                             <p>Terbit : <?= $book['Tahun_Terbit'] ?></p>
                             <p>Stok : <?= $book['Stok'] ?></p>
-                            <form action="" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>'>Pinjam</button></form>
+                            <form action="<?= BASE_URL.'/pemustaka/daftarbuku.php'?>" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>'>Pinjam</button></form>
                     </div>
                 </div>
             <?php endforeach ?>

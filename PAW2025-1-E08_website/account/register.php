@@ -126,7 +126,7 @@
                             <font class="error"><?= $error_username?></font>
                         </div>
                         <div class="input">
-                            <input type="text"  placeholder="password" name="password" class="pass">
+                            <input type="text"  placeholder="password" name="password">
                             <font class="error"><?= $error_password?></font>
                         </div>
                         <div class="input">
@@ -148,18 +148,9 @@
                         <div>
                             <label for="">Tanggal lahir:</label>
                             <div class="ttl">
-                                <select name="tahun" id="">
-                                    <option value="">---Tahun---</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2017">2017</option>
-                                </select>
-                                <select name="bulan" id="">
-                                    <option value="">---Bulan---</option>
-                                    <option value="09">09</option>
-                                </select><select name="tanggal" id="">
-                                    <option value="">---Tanggal---</option>
-                                    <option value="24">24</option>
-                                </select>
+                                <input type="text"  placeholder="Tahun" name="tahun" value="<?= $tahun?>">
+                                <input type="text"  placeholder="Bulan" name="bulan" value="<?= $bulan?>">
+                                <input type="text"  placeholder="Tanggal" name="tanggal" value="<?= $tanggal?>">
                             </div>
                             <font class="error"><?= $error_ttl?></font>
                         </div>
