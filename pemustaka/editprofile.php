@@ -21,13 +21,16 @@
             }elseif(!minusn($username)){
                 $error_username = 'Username minimal 3 karakter';
                 $succses = FALSE;
-            }elseif(!Alfabet($username)){
+                $username = '';
+            }elseif(!Alfanumerik($username)){
                 $error_username = 'username hanya karakter';
                 $succses = FALSE;
+                $username = '';
             }elseif ($username !== $_SESSION['username']) {
                 if (cekUsernamePemustaka($_POST)) {
                     $error_username = 'username sudah digunakan!';
                     $succses = FALSE;
+                    $username = '';
                 }
             }
             
@@ -38,6 +41,7 @@
             }elseif(!Email($email)){
                 $error_email = 'Masukkan format email dengan benar';
                 $succses = FALSE;
+                $email = '';
             }
             
             // validasi telephone
@@ -47,6 +51,7 @@
             }elseif(!maxtlp($nomor)){
                 $error_nomor = 'Nomor minimal 12 angka';
                 $succses = FALSE;
+                $nomor = '';
             }
             
             //validasi alamat
@@ -56,6 +61,7 @@
             }elseif(!Alamat($alamat)){
                 $error_alamat = 'Alamat tidak valid';
                 $succses = FALSE;
+                $alamat = '';
             }
             
             if($succses == TRUE){

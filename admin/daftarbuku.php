@@ -33,6 +33,7 @@
                 <th>Penerbit</th>
                 <th>Tahun Terbit</th>
                 <th>Stok</th>
+                <th>Kategori</th>
                 <th>Aksi</th>
             </tr>
             <?php foreach ($buku as $book):?>
@@ -42,10 +43,11 @@
                     <td><?= $book['Penerbit'] ?></td>
                     <td><?= $book['Tahun_Terbit'] ?></td>
                     <td><?= $book['Stok'] ?></td>
+                    <td><?= $book['kategori'] ?></td>
                     <td>
                         <div class="updel-buku">
-                            <a href="<?=BASE_URL.'/admin/deletebuku.php'?>?id_buku=<?= $book['id_buku']?>" class="btn">Hapus</a>
-                            <a href="<?=BASE_URL.'/admin/updatebuku.php'?>?id_buku=<?= $book['id_buku']?>" class="btn">Edit</a>
+                            <a href="<?=BASE_URL.'/admin/deletebuku.php'?>?id_buku=<?= $book['id_buku']?>" class="btn-hapus">Hapus</a>
+                            <a href="<?=BASE_URL.'/admin/updatebuku.php'?>?id_buku=<?= $book['id_buku']?>" class="btn-edit">Edit</a>
                         </div>
                     </td>
                 </tr>

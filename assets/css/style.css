@@ -21,7 +21,7 @@
 }
 
 body{
-    padding-left: 330px;
+    padding-left: 300px;
     background-color: #f3f0ff;
 }
 
@@ -41,7 +41,7 @@ main{
 	left: 0;
 	/* width: 240px; */
 	height: 94vh;
-	padding: 30px 0 10px 50px;
+	padding: 30px 0 10px 30px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -102,6 +102,7 @@ main{
 
 .nav{
 	display: flex;
+    width: 96%;
 	padding-top:20PX ;
     padding: 30px;
     padding-bottom: 0;
@@ -150,7 +151,7 @@ main{
     transition: 0.2s;
 }
 
-.auth-links .btn-logout {
+.auth-links .btn-logout{
     /* border: 1px solid black; */
     color: white;
     background-color: red;
@@ -244,21 +245,33 @@ table tr:hover td {
     background: #f7f7ff;
 }
 
-
-.updel-buku .btn {
-    padding: 6px 16px;
-    background: #11c26f;
+.btn-cari {
+    padding: 10px 5px;
+    background: #6c63ff;
+    width: 100px;
+    display: flex;
+    justify-content: center;
     color: white;
     border: none;
     border-radius: 6px;
     font-size: 14px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
 }
 
-.btn-tambah {
+.btn-hapus {
+    padding: 10px 5px;
+    background: red;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-tambah, .btn-pinjam {
     padding: 10px 5px;
     background: #11c26f;
     width: 100px;
@@ -271,24 +284,18 @@ table tr:hover td {
     cursor: pointer;
 }
 
-.updel-buku .btn:hover {
-    background: #0ea95d;
-}
-
-button {
-    padding: 6px 16px;
-    background: #11c26f;
+.btn-edit{
+    padding: 10px 5px;
+    background: #ffa726;
+    width: 100px;
+    display: flex;
+    justify-content: center;
     color: white;
     border: none;
     border-radius: 6px;
     font-size: 14px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-button:hover {
-    opacity: 0.8;
+    
 }
 
 .cover{
@@ -311,6 +318,7 @@ button:hover {
     text-align: left;
     background-color: #fff;
     border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 }
 
 .dafbuk{
@@ -397,3 +405,26 @@ button:hover {
     border: 1px solid #ffa726;
 }
 
+.menu-kategori{
+    display: flex;
+    gap: 20px;
+}
+.menu-kategori select{
+    padding: 10px   ;
+    display: flex;
+    text-align: left;
+    width: 300px;
+    height: 50px;
+    background-color: #ffff;
+    border: none;
+    border-radius: 10px;
+    box-shadow:0px 0px 15px rgba(0, 0, 0, 0.2);
+    font-size: large;
+}
+
+.menu-kategori button{
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}

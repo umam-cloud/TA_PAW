@@ -1,5 +1,4 @@
 <?php
-    // session_start();
     require_once('../base.php');
     require_once(BASE_PATH."/database.php");
 
@@ -11,14 +10,16 @@
          $succses = TRUE;
          
         if(!wajib_isi($username)){
-             $error_username = 'Username wajib di isi';
-             $succses = FALSE;
+            $error_username = 'Username wajib di isi';
+            $succses = FALSE;
         }elseif(!minusn($username)){
             $error_username = 'Username minimal 3 karakter';
             $succses = FALSE;
-        }elseif(!Alfabet($username)){
+            $username ='';
+        }elseif(!Alfanumerik($username)){
             $error_username = 'username hanya karakter';
             $succses = FALSE;
+            $username ='';
         }
         
         if (!wajib_isi($password)){
@@ -27,8 +28,9 @@
         }elseif(!Password($password)){
             $error_password = 'Password minimal dari 8 karakter dan harus ada kombinasi simbol, angka, huruf besar';
             $succses = FALSE;
+            $password ='';
         }
-
+        
         if($succses == TRUE){
             if(cekAkun($_POST)){
                 login($_POST);
@@ -65,11 +67,11 @@
                     <h1>Login account</h1>
                     <form action="" method="POST">
                         <div class="input">
-                            <input type="text" placeholder="Username" name="username">
+                            <input type="text" placeholder="Username" name="username" value="<?= $username ?>">
                             <font class="error"><?= $error_username?></font>
                         </div>
                         <div class="input">
-                            <input type="text"  placeholder="password" name="password" class="pass">
+                            <input type="text"  placeholder="password" name="password" class="pass" value="<?= $password ?>">
                             <font class="error"><?= $error_password?></font>
                         </div>
                         <font class="error"><?= $error_login?></font>

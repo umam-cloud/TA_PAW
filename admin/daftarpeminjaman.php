@@ -48,9 +48,6 @@
             <th>Aksi</th>
         </tr>
         <?php foreach ($peminjaman as $peminjam):?>
-            <?php if ($hari_ini>$peminjam['tgl_pengembalian'] ):?>
-                <?php  updateStatusBuku($peminjam['id_buku'], 'tersedia') ?>
-            <?php else:?>
                 <tr>
                     <td><?= $peminjam['judul_buku'] ?></td>
                     <td><?= $peminjam['username_pemustaka'] ?></td>
@@ -60,11 +57,10 @@
                     <?php if ($peminjam['status'] === 'Diproses' ):?>
                         <form action="<?= BASE_URL.'/admin/daftarpeminjaman.php'?>" method='POST'><td>
                             <input type="hidden" value= '<?= $peminjam ['id_buku']?>' name="buku">
-                            <button name='terima' value='<?= $peminjam['id_peminjaman'] ?>'>Terima</button>
+                            <button name='terima' value='<?= $peminjam['id_peminjaman'] ?>' class="btn-edit">Terima</button>
                         </td></form>
                     <?php endif; ?>
                 </tr>
-            <?php endif?>
         <?php endforeach?>
             
         </table>

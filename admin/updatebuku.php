@@ -8,24 +8,30 @@
     }
 
     $buku = getDataBuku($_GET['id_buku']);
-    // var_dump($buku);
-    // $judul = $penulis = $penerbit = $tahun_terbit = '';
-    $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit = $error_cover='';
+    $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit = $error_stok = $error_cover='';
     
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $judul = $_POST['judul'];
         $penerbit = $_POST['penerbit'];
         $penulis = $_POST['penulis'];
         $tahun_terbit = $_POST['tahun_terbit'];
+        $stok = $_POST['stok'];
+
         if (isset($_POST['btn'])) {
-            if ($_POST['btn'] == 'simpan') {
-                $answer = True;
+            if ($_POST['btn']=='simpan') {
+                $answer = TRUE;
+                if(empty($_FILES['cover']['name'])){
+                    $error_cover ='wajib di isi';
+                    $answer = FALSE;
+                }
+    
                 if(!wajib_isi($judul)){
                     $error_judul = 'Wajib di isi';
                     $answer = FALSE;
                 }elseif(!Alfanumerik($judul)){
                     $error_judul = 'Judul Tidak Valid';
                     $answer = FALSE;
+                    $judul = '';
                 }
                 
                 if(!wajib_isi($penulis)){
@@ -34,6 +40,7 @@
                 }elseif(!Alfabet($penulis)){
                     $error_penulis = "Penulis Hanya Alfabet";
                     $answer = FALSE;
+                    $penulis = '';
                 }
                 
                 if(!wajib_isi($penerbit)){
@@ -42,16 +49,30 @@
                 }elseif(!Alfanumerik($penerbit)){
                     $error_penerbit = 'Nama Penerbit Tidak Valid';
                     $answer = FALSE;
+                    $penerbit = '';
                 }
                 
                 if(!wajib_isi($tahun_terbit)){
                     $error_tahun_terbit = 'Wajib di isi';
                     $answer = FALSE;
-                }elseif(!Numerik($tahun_terbit)){
+                }elseif(!TahunTerbit($tahun_terbit)){
                     $error_tahun_terbit = 'Tahun Terbit Tidak Valid';
                     $answer = FALSE;
+                    $tahun_terbit = '';
                 }
-        
+                if(!wajib_isi($stok)){
+                    $error_stok = 'Wajib di isi';
+                    $answer = FALSE;
+                }elseif (!Numerik($stok)) {
+                    $error_stok = 'Isi stok dengan benar!';
+                    $answer = FALSE;
+                    $stok = '';
+                }elseif(!stok($stok)){
+                    $error_stok = 'Stok tidak boleh lebih dari 5';
+                    $answer = FALSE;
+                    $stok = '';
+                }
+                
                 if ($answer == TRUE) {
                     if (!empty($_FILES['cover']['name'])) {
                             updateCover($_GET['id_buku']);
@@ -112,9 +133,26 @@
                     <input type="text" name="tahun_terbit"  value="<?=$tahun_terbit ?? $buku['Tahun_Terbit']?>">
                 </div>
                 <div class="error"><?=$error_tahun_terbit?></div>
+
+                 <div class="form-group">
+                    <label>Stok:</label>
+                    <input type="text" name="stok"  value="<?=$stok ?? $buku['Stok']?>">
+                </div>
+                <div class="error"><?=$error_stok?></div>
+
+                <div class="form-group">
+                    <label>Kategori :</label>
+                    <select name="kategori" id="kategori">
+                        <option Value="Pendidikan" <?= (($kategori?? $buku['kategori'] ) == 'Pendidikan') ? 'selected': '' ?>>Pendidikan</option>
+                        <option value="Fiksi" <?= (($kategori?? $buku['kategori'] )  == 'Fiksi') ? 'selected': '' ?>>Fiksi</option>
+                        <option value="Non Fiksi" <?= (($kategori?? $buku['kategori'] )  == 'Non Fiksi') ? 'selected': '' ?>>Non Fiksi</option>
+                        <option value="Sejarah" <?= (($kategori?? $buku['kategori'] )  == 'Sejarah') ? 'selected': '' ?>>Sejarah</option>
+                    </select>
+                </div>
+
                 <div class="btn">
-                    <button name="btn" value='simpan'>Simpan</button>
-                    <button name="btn" value='kembali'>Kembali</button>
+                    <button name="btn" value='simpan' class="simpan">Simpan</button>
+                    <button name="btn" value='kembali' class="cancel">Batal</button>
                 </div>
             </form>
         </div>

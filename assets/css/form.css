@@ -61,13 +61,35 @@ body{
 }
 .box button{
     padding: 12px 20px;
-    background-color: #6c63ff;
-    color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
     width: 150px;
+}
+
+
+.cancel{
+    background-color: red;
+    color: white;
+}
+
+.simpan{
+    background-color: #6c63ff;
+    color: white;
+}
+
+.form-group select{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -40px;
+    padding-left: 10px;
+    background-color:#e5e4ff;
+    border-radius: 8px;
+    border: none;
+    height: 40px;
+    width: 220px;
 }
 
 .box .btn{
@@ -103,22 +125,4 @@ body{
     border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
-}
-
-.container-validasi form button [value="hapus"] {
-    background: #1a73e8;
-    color: rgb(0, 0, 0);
-}
-
-.container-validasi form button[value="hapus"]:hover {
-    background: #1059b3;
-}
-
-.container-validasi form button[value="cancel"] {
-    background: #e4edff;
-    color: #000000;
-}
-
-.container-validasi form button[value="cancel"]:hover {
-   background: #1059b3;
 }

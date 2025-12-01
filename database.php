@@ -4,6 +4,7 @@ require_once('base.php');
 require_once(BASE_PATH . '/conn.php');
 require_once(BASE_PATH . '/validasi.php');
 
+// untuk di daftar pemustaka admin
 function getPemustaka(){
 	$stmnt = DBH->prepare('SELECT * FROM pemustaka');
 	$stmnt->execute();
@@ -11,6 +12,7 @@ function getPemustaka(){
 	return $pemustaka;
 }
 
+// Untuk sidebar, eddit profile dan bagian profile
 function getDataPemustaka(int $id){
 	$stmnt = DBH->prepare('SELECT * FROM pemustaka WHERE id_pemustaka = :id_pemustaka');
 	$stmnt->execute([':id_pemustaka' => $id ]);
@@ -19,6 +21,7 @@ function getDataPemustaka(int $id){
 
 }
 
+// Untuk register pemustaka
 function addUser(array $data){
 	$stmnt = DBH->prepare('	INSERT INTO pemustaka (Username, Password, Email, Nomor_Telpon, Jenis_kelamin, Tgl_Lahir, Alamat) 
 	VALUE (:username, :pass, :email, :no_telp, :jenkel, :tgl_lahir, :alamat)');
@@ -33,6 +36,7 @@ function addUser(array $data){
 	]);
 }
 
+// Untuk mengedit biodata pemustaka di edit profile
 function updateUser(int $id, array $data) {
 	$stmnt = DBH->prepare('UPDATE pemustaka SET Username = :username, Email = :email, Alamat = :alamat, Nomor_Telpon = :nomor_telepon WHERE id_pemustaka = :id_user');
 	$stmnt->execute([
@@ -44,6 +48,7 @@ function updateUser(int $id, array $data) {
 	]);
 }
 
+// Dipakai di register dan edit profile
 function cekUsernamePemustaka(array $data){
     $stmnt = DBH->prepare('SELECT Username FROM pemustaka WHERE Username= :username UNION SELECT Username FROM admin WHERE Username= :username');
     $stmnt->execute([
@@ -55,7 +60,7 @@ function cekUsernamePemustaka(array $data){
     return $jumlahBaris > 0;
 }
 
-
+// Dipakai di bagian login untuk ngecek akun 
 function cekAkun(array $data){
     $stmnt = DBH->prepare('SELECT Username FROM pemustaka WHERE Username= :username and Password = :password UNION SELECT Username FROM admin WHERE Username= :username and Password = :password');
     $stmnt->execute([
@@ -69,7 +74,7 @@ function cekAkun(array $data){
 }
 
 
-
+// Untuk validasi session login
 function login(array $data){
 	$stmnt = DBH->prepare('SELECT id_pemustaka AS id,Username,"pemustaka" AS role FROM pemustaka WHERE Username=:username and Password =:pass UNION SELECT id_admin AS id,Username,"admin" AS role FROM admin WHERE Username=:username and Password =:pass');
 	$stmnt->execute([
@@ -83,6 +88,7 @@ function login(array $data){
 	$_SESSION['role'] = $user['role'];
 } 
 
+// Dipakai di daftar buku admin dan pemustaka
 function getBuku(){
 	$stmnt = DBH->prepare('SELECT * FROM buku');
 	$stmnt->execute();
@@ -90,6 +96,7 @@ function getBuku(){
 	return $buku;
 }
 
+// Dipakai di Beranda admin dan pemustaka untuk menampilkan buku terbaru
 function getBukuTerbaru(){
 	$stmnt = DBH->prepare('SELECT * FROM buku ORDER BY id_buku DESC LIMIT 6');
 	$stmnt->execute();
@@ -97,6 +104,7 @@ function getBukuTerbaru(){
 	return $buku;
 }
 
+// 
 function getDataBuku(int $id){
 	$stmnt = DBH->prepare('SELECT * FROM buku WHERE id_buku = :id_buku');
 	$stmnt->execute([':id_buku' => $id ]);
@@ -104,39 +112,54 @@ function getDataBuku(int $id){
 	return $buku;
 }
 
+// Dipakai di delete buku untuk menghapus buku
 function deleteBuku(int $id){
+	$cover = DBH->prepare('SELECT Cover FROM buku WHERE id_buku = :id');
+	$cover->execute([
+		':id' => $id
+	]);
+	$buku = $cover->fetch();
+	unlink(BASE_PATH."/assets/covbuk/".$buku['Cover']);
+
 	$stmnt = DBH->prepare('DELETE FROM buku WHERE ID_Buku = :id_buku');
 	$stmnt->execute([':id_buku' => $id ]);
+
 }
 
+// Dipakai di tambah buku untuk menambah buku baru
 function addBuku(array $data){
-	$stmt = DBH->prepare("INSERT INTO buku (Judul, Penulis, Penerbit, Tahun_Terbit, Stok ,Cover) VALUE (:Judul, :Penulis, :Penerbit, :Tahun_Terbit, :stok , :Cover)");
-	$namaFile=time()."_".$_FILES['cover']['name'];
-	$tmpFile=$_FILES['cover']['tmp_name'];
+	$stmt = DBH->prepare("INSERT INTO Buku (Judul, Penulis, Penerbit, Tahun_Terbit, Stok, kategori ,Cover) VALUE (:Judul, :Penulis, :Penerbit, :Tahun_Terbit, :stok, :kategori, :Cover)");
+	$namaFile = time() . "_" . $_FILES['cover']['name'];
+	$tmpFile = $_FILES['cover']['tmp_name'];
 	$stmt->execute([
 	':Judul' => $data ['judul'],
 	':Penulis' => $data ['penulis'],
 	':Penerbit' => $data ['penerbit'],
 	':Tahun_Terbit' => $data ['tahun_terbit'],
-    ':stok' => $data['stok'],
+	':stok' => $data['stok'],
+	':kategori' => $data['kategori'],
 	':Cover' => $namaFile,
 	]);
 
 	#menambahkan foto baru
-	move_uploaded_file($tmpFile, BASE_PATH."/assets/covbuk/".$namaFile);
+	move_uploaded_file($tmpFile, BASE_PATH."/assets/covbuk/" . $namaFile);
 }
 
+// Dipakai di update buku untuk menambah buku baru
 function updateBuku(int $id, array $data) {
-	$stmnt = DBH->prepare("UPDATE buku SET Judul = :Judul, Penulis = :Penulis, Penerbit = :Penerbit, Tahun_Terbit = :Tahun_Terbit WHERE ID_Buku = :id_buku");
+	$stmnt = DBH->prepare("UPDATE buku SET Judul = :Judul, Penulis = :Penulis, Penerbit = :Penerbit, Tahun_Terbit = :Tahun_Terbit, Stok = :stok, kategori = :kategori WHERE ID_Buku = :id_buku");
 	$stmnt->execute([
 		':Judul' => $data['judul'],
 		':Penulis' => $data['penulis'],
      	':Penerbit' => $data['penerbit'],
      	':Tahun_Terbit' => $data['tahun_terbit'],
+		':stok' => $data['stok'],
+		':kategori' => $data['kategori'],
 		':id_buku' => $id,
 	]);
 }
 
+// Dipakai di bagian update buku untuk mengubah cover buku
 function updateCover(int $id){
 	#menghapus foto sebelumnya
 	$cover = DBH->prepare('SELECT Cover FROM buku WHERE id_buku = :id');
@@ -144,7 +167,7 @@ function updateCover(int $id){
 		':id' => $id
 	]);
 	$buku = $cover->fetch();
-	unlink(BASE_PATH."/assets/fotoProfile/".$buku['Profil']);
+	unlink(BASE_PATH."/assets/covbuk/".$buku['Cover']);
 
 	#menambahkan foto baru
 	$namaFile = time() . "_" . $_FILES['cover']['name'];
@@ -158,9 +181,26 @@ function updateCover(int $id){
 	]);
 }
 
+// Diapakai di daftar buku ketika pemustaka ingin mencari kategori buku yang lain
+function kategori($kategori){
+	if($kategori === 'semua'){
+		$stmnt = DBH->prepare("SELECT * FROM buku");
+		$stmnt ->execute();
+		$kategori = $stmnt->fetchAll();
+		return $kategori;
+	}
+	$stmnt = DBH->prepare("SELECT * FROM buku WHERE kategori LIKE :kategori ");
+	$stmnt ->execute([
+		':kategori'=> $kategori
+	]);
+	$kategori = $stmnt->fetchAll();
+	return $kategori;
+}
+
 
 // ==== sistem peminjaman ======
 
+// Dipakai  di bagian daftar buku pemustaka ketika pemustaka meminjam buku
 function addPeminjam(int $buku, int $pemustaka){
 	$stmt = DBH->prepare("INSERT INTO peminjaman (id_buku, id_pemustaka, tgl_pengembalian) VALUE (:id_buku, :id_pemustaka, :tgl_pengembalian)");
 	$stmt->execute([
@@ -170,6 +210,8 @@ function addPeminjam(int $buku, int $pemustaka){
 	]);
 }
 
+// Di pakai di daftar peminjaman admin 
+// untuk melihat siapa saja pemustaka yang meminjam buku
 function daftarPeminjaman(){
 	$stmnt = DBH->prepare(
 	'SELECT 
@@ -192,6 +234,7 @@ function daftarPeminjaman(){
 	return $peminjam;
 }
 
+// Dipakai di update profile untuk mengupdate foto profile
 function updateProfile(int $id){
 	#menghapus foto sebelumnya
 	$profil = DBH->prepare('SELECT Profil FROM pemustaka WHERE id_pemustaka = :id');
@@ -214,6 +257,7 @@ function updateProfile(int $id){
 	]);
 }
 
+// Dipakai di bagian Koleksi pemustaka melihat buku apa saja yang pemustaka pinjam
 function koleksi(){
 	$id_pemustaka = $_SESSION['id_user'];
 	$stmnt = DBH->prepare(

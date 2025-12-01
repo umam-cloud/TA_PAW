@@ -33,8 +33,8 @@
         <div class="container-validasi">
         <h1>Yakin?</h1>
         <form method="POST">
-            <button name="delete" value="hapus">Hapus</button>
-            <button name="delete" value="cancel" >Cancel</button>
+            <button name="delete" value="hapus" class="simpan">Hapus</button>
+            <button name="delete" value="cancel" class="cancel">Batal</button>
         </form>
         </div>
     </main>

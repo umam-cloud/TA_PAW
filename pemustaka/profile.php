@@ -53,8 +53,8 @@
                     <p><?= $dataPemustaka['Alamat']; ?></p>
                 </div>
                 <div class="button-holder">
-                    <a href="<?=BASE_URL.'/index.php'?>" class="btn cancel">Kembali</a>
-                   <a href="<?=BASE_URL.'/pemustaka/editprofile.php'?>" class="btn-save">Edit</a>
+                    <a href="<?=BASE_URL.'/index.php'?>" class="btn back">Kembali</a>
+                   <a href="<?=BASE_URL.'/pemustaka/editprofile.php'?>" class="btn edit">Edit</a>
                 </div>
 
             </div>

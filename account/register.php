@@ -26,9 +26,11 @@
         }elseif(!minusn($username)){
             $error_username = 'Username minimal 3 karakter';
             $succses = FALSE;
-        }elseif(!Alfabet($username)){
+            $username = '';
+        }elseif(!Alfanumerik($username)){
             $error_username = 'username hanya karakter';
             $succses = FALSE;
+            $username = '';
         }
         
         // validasi tanggal
@@ -44,6 +46,9 @@
         }elseif(!tanggal($tahun, $bulan, $tanggal)){
             $error_ttl = 'Anda tidak cukup umur!';
             $succses = FALSE;
+            $tahun = '';
+            $bulan = '';
+            $tanggal = '';
         }
         
         //validasi password
@@ -53,6 +58,7 @@
         }elseif(!Password($password)){
             $error_password = 'minimal dari 8 karakter dan harus ada kombinasi simbol, angka, huruf besar';
             $succses = FALSE;
+            $password = '';
         }
         
         //validasi email
@@ -62,6 +68,7 @@
         }elseif(!Email($email)){
             $error_email = 'Masukkan format email dengan benar';
             $succses = FALSE;
+            $email = '';
         }
         
         // validasi telephone
@@ -71,6 +78,7 @@
         }elseif(!maxtlp($nomor)){
             $error_nomor = 'Nomor minimal 12 angka';
             $succses = FALSE;
+            $nomor = '';
         }
         
         //validasi alamat
@@ -80,13 +88,14 @@
         }elseif(!Alamat($alamat)){
             $error_alamat = 'Alamat tidak valid';
             $succses = FALSE;
+            $alamat = '';
         }
         
         if(!wajib_isi($jenkel)){
             $succses = FALSE;
             $error_jenkel = 'jenis kelamin wajib di pilih';
         }
-
+        
         if($succses == TRUE){
             if(cekUsernamePemustaka($_POST)){
                 $error_register='akun sudah ada!!';
@@ -122,26 +131,26 @@
                     <h1>Create an account</h1>
                     <form action="" method="POST">
                         <div class="input">
-                            <input type="text" placeholder="Username" name="username">
+                            <input type="text" placeholder="Username" name="username" value="<?= $username ?>">
                             <font class="error"><?= $error_username?></font>
                         </div>
                         <div class="input">
-                            <input type="text"  placeholder="password" name="password">
+                            <input type="text"  placeholder="password" name="password" value="<?= $password ?>">
                             <font class="error"><?= $error_password?></font>
                         </div>
                         <div class="input">
-                            <input type="text"  placeholder="Email" name="email">
+                            <input type="text"  placeholder="Email" name="email" value="<?= $email ?>">
                             <font class="error"><?= $error_email?></font>
                         </div>
                         <div class="input">
-                            <input type="text"  placeholder="No Telp" name="tlp">
+                            <input type="text"  placeholder="No Telp" name="tlp" >
                             <font class="error"><?= $error_nomor?></font>
                         </div>
                         <div class="input">
                             <select name="jenkel" id="">
                                 <option value="">---Jenis Kelamin---</option>
-                                <option value="Laki-laki">---Laki-Laki---</option>
-                                <option value="Perempuan">---Perempuan---</option>
+                                <option value="Laki-laki" <?= ($jenkel == 'Laki-laki') ? 'selected': '' ?>>---Laki-Laki---</option>
+                                <option value="Perempuan" <?= ($jenkel == 'Perempuan') ? 'selected': '' ?>>---Perempuan---</option>
                             </select>
                             <font class="error"><?= $error_jenkel?></font>
                         </div>
@@ -155,7 +164,7 @@
                             <font class="error"><?= $error_ttl?></font>
                         </div>
                         <div class="input">
-                            <textarea name="alamat" id="" placeholder="Alamat"></textarea> 
+                            <textarea name="alamat" id="" placeholder="Alamat" value="<?= $alamat?>"></textarea> 
                             <font class="error"><?= $error_alamat?></font>
                         </div>   
                         <font class="error"><?= $error_register?></font>

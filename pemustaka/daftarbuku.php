@@ -13,6 +13,11 @@
 
     $buku = getBuku();
     // var_dump($buku);
+    if(isset($_GET['submit']) ){
+        $keyword = $_GET['kategori'];
+        $buku = kategori($keyword);
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +30,25 @@
 </head>
 <body>
 
-
     <?php 
         require_once(BASE_PATH."/component/nav.php");
         require_once(BASE_PATH."/component/sidebar.php");
     ?>
     <main>
+        <form method="GET">
+            <div class="menu-kategori">
+                <select name="kategori" id="kategori">
+                    <option value="semua">Kategori</option>
+                    <Option Value="Pendidikan">Pendidikan</Option>
+                    <option value="Fiksi">Fiksi</option>
+                    <option value="Non Fiksi">Non Fiksi</option>
+                    <option value="Sejarah">Sejarah</option>
+                    <option value="semua">Semua</option>
+                </select>
+                <button name="submit" class="btn-cari">cari</button>
+            </div>
+        </form>
+
         <div class="menu_dafbuk">
             <?php foreach ($buku as $book):?>
                 <div class="dafbuk">
@@ -41,7 +59,11 @@
                             <p>Penerbit : <?= $book['Penerbit'] ?></p>
                             <p>Terbit : <?= $book['Tahun_Terbit'] ?></p>
                             <p>Stok : <?= $book['Stok'] ?></p>
-                            <form action="<?= BASE_URL.'/pemustaka/daftarbuku.php'?>" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>'>Pinjam</button></form>
+                            <?php if($book['Stok'] >0): ?>
+                            	<form action="<?= BASE_URL.'/pemustaka/daftarbuku.php'?>" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>' class="btn-pinjam">Pinjam</button></form>
+                        	<?php else: ?>
+                        		<p>Stok Buku Habis</p>
+                        	<?php endif ?>
                     </div>
                 </div>
             <?php endforeach ?>

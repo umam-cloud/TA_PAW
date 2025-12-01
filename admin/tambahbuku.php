@@ -12,12 +12,13 @@
     }
 
     $judul = $penulis = $penerbit = $tahun_terbit = $cover= $stok ='';
-    $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit =  $error_cover = $error_stok ='';
+    $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit =  $error_cover = $error_stok = $error_kategori ='';
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $judul = $_POST['judul'];
         $penulis = $_POST['penulis'];
         $penerbit = $_POST['penerbit'];
         $tahun_terbit = $_POST['tahun_terbit'];
+        $kategori = $_POST['kategori'];
         $stok = $_POST['stok'];
     
         if (isset($_POST['btn'])) {
@@ -34,6 +35,7 @@
                 }elseif(!Alfanumerik($judul)){
                     $error_judul = 'Judul Tidak Valid';
                     $succses = FALSE;
+                    $judul = '';
                 }
                 
                 if(!wajib_isi($penulis)){
@@ -42,6 +44,7 @@
                 }elseif(!Alfabet($penulis)){
                     $error_penulis = "Penulis Hanya Alfabet";
                     $succses = FALSE;
+                    $penulis = '';
                 }
                 
                 if(!wajib_isi($penerbit)){
@@ -50,24 +53,35 @@
                 }elseif(!Alfanumerik($penerbit)){
                     $error_penerbit = 'Nama Penerbit Tidak Valid';
                     $succses = FALSE;
+                    $penerbit = '';
                 }
                 
                 if(!wajib_isi($tahun_terbit)){
                     $error_tahun_terbit = 'Wajib di isi';
                     $succses = FALSE;
-                }elseif(!Numerik($tahun_terbit)){
+                }elseif(!TahunTerbit($tahun_terbit)){
                     $error_tahun_terbit = 'Tahun Terbit Tidak Valid';
                     $succses = FALSE;
+                    $tahun_terbit = '';
                 }
-                
                 if(!wajib_isi($stok)){
                     $error_stok = 'Wajib di isi';
                     $succses = FALSE;
+                }elseif (!Numerik($stok)) {
+                    $error_stok = 'Isi stok dengan benar!';
+                    $succses = FALSE;
+                    $stok = '';
                 }elseif(!stok($stok)){
                     $error_stok = 'Stok tidak boleh lebih dari 5';
                     $succses = FALSE;
+                    $stok = '';
                 }
-    
+                
+                if (!wajib_isi($kategori)){
+                    $error_kategori = 'Wajib di isi';
+                    $succses = FALSE;
+                }
+                
                 if ($succses == TRUE) {
                     addBuku($_POST);
                     header('location:'.BASE_URL.'/admin/daftarbuku.php');
@@ -77,6 +91,7 @@
                 header('location:'.BASE_URL.'/admin/daftarbuku.php');
                 exit();
             }
+            
         }
     }
 ?>
@@ -130,9 +145,21 @@
                 </div>
                 <div class="error"><?=$error_stok?></div>
                 
+                <div class="form-group">
+                    <label>Kategori :</label>
+                    <select name="kategori" id="kategori">
+                        <option Value="">kategori</option>
+                        <option Value="Pendidikan" <?= ($kategori == 'Pendidikan') ? 'selected': '' ?>>Pendidikan</option>
+                        <option value="Fiksi" <?= ($kategori == 'Fiksi') ? 'selected': '' ?>>Fiksi</option>
+                        <option value="Non Fiksi" <?= ($kategori == 'Non Fiksi') ? 'selected': '' ?>>Non Fiksi</option>
+                        <option value="Sejarah" <?= ($kategori == 'Sejarah') ? 'selected': '' ?>>Sejarah</option>
+                    </select>
+                </div>
+                <div class="error"><?=$error_kategori?></div>
+                
                 <div class="btn">
-                    <button name="btn" value='tambah'>Tambah</button>
-                    <button name="btn" value='kembali'>Kembali</button>
+                    <button name="btn" value='tambah' class="simpan">Tambah</button>
+                    <button name="btn" value='kembali' class="cancel">Batal</button>
                 </div>
             </form>
         </div>
