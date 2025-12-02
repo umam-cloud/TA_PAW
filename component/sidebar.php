@@ -8,11 +8,11 @@
 ?>
 <div class="sidebar">
   <div class="sidebar-container">
-      <?php if (!isset($_SESSION['role']) or $_SESSION['role'] == 'pemustaka'):?>
-        <img src="<?= BASE_URL.'/assets/fotoProfile/'.($_SESSION['foto_profile']??$fotoProfile) ?>" alt="" class="profile">
-      <?php elseif ($_SESSION['role'] == 'admin'):?>
-        <img src="<?= BASE_URL.'/assets/fotoProfile/profile.png'?>" alt="" class="profile">
-      <?php endif?>
+    <?php if (!isset($_SESSION['role']) or $_SESSION['role'] == 'pemustaka'):?>
+      <img src="<?= BASE_URL.'/assets/fotoProfile/'.($_SESSION['foto_profile']??$fotoProfile) ?>" alt="" class="profile">
+    <?php elseif ($_SESSION['role'] == 'admin'):?>
+      <img src="<?= BASE_URL.'/assets/fotoProfile/profile.png'?>" alt="" class="profile">
+    <?php endif?>
     <div>
       <div class="menu">
         <?php if (!isset($_SESSION['role']) or $_SESSION['role']=='pemustaka'):?>

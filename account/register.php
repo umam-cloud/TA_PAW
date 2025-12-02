@@ -143,7 +143,7 @@
                             <font class="error"><?= $error_email?></font>
                         </div>
                         <div class="input">
-                            <input type="text"  placeholder="No Telp" name="tlp" >
+                            <input type="text"  placeholder="No Telp" name="tlp" value="<?= $nomor?>">
                             <font class="error"><?= $error_nomor?></font>
                         </div>
                         <div class="input">
@@ -164,7 +164,7 @@
                             <font class="error"><?= $error_ttl?></font>
                         </div>
                         <div class="input">
-                            <textarea name="alamat" id="" placeholder="Alamat" value="<?= $alamat?>"></textarea> 
+                            <textarea name="alamat" id="" placeholder="Alamat"><?= $alamat?></textarea> 
                             <font class="error"><?= $error_alamat?></font>
                         </div>   
                         <font class="error"><?= $error_register?></font>

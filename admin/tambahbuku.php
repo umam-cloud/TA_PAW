@@ -1,8 +1,4 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
     require_once('../base.php');
     require_once(BASE_PATH."/database.php");
 
@@ -11,7 +7,7 @@
         exit;
     }
 
-    $judul = $penulis = $penerbit = $tahun_terbit = $cover= $stok ='';
+    $judul = $penulis = $penerbit = $tahun_terbit = $cover= $stok = $kategori ='';
     $error_judul = $error_penulis = $error_penerbit = $error_tahun_terbit =  $error_cover = $error_stok = $error_kategori ='';
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $judul = $_POST['judul'];
@@ -27,7 +23,10 @@
                 if(empty($_FILES['cover']['name'])){
                     $error_cover ='wajib di isi';
                     $succses = FALSE;
-                }
+                }elseif(!validasiGambar($_FILES['cover'])){
+    				$error_cover ="Tipe file tidak valid! Hanya boleh JPG, JPEG, PNG, WEBP.";
+                    $succses = FALSE;
+				}
     
                 if(!wajib_isi($judul)){
                     $error_judul = 'Wajib di isi';

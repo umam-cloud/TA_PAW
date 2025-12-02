@@ -1,9 +1,5 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
-    require_once("base.php");
+   	require_once("base.php");
     require_once(BASE_PATH."/database.php");
     $bukuTerbaru = getBukuTerbaru();
     $active = 'beranda';
@@ -16,7 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?= BASE_URL.'/assets/css/style.css'?>">
-        <title>Document</title>
+        <title>PerpusKids</title>
     </head>
     <body>
         <?php

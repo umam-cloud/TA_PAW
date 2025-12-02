@@ -38,7 +38,7 @@
     require_once(BASE_PATH."/component/sidebar.php");
     ?>
     <main>    
-        <table >
+        <table border='1'>
         <tr>
             <th>Judul Buku</th>
             <th>Nama Peminjam</th>
@@ -48,19 +48,19 @@
             <th>Aksi</th>
         </tr>
         <?php foreach ($peminjaman as $peminjam):?>
-                <tr>
-                    <td><?= $peminjam['judul_buku'] ?></td>
-                    <td><?= $peminjam['username_pemustaka'] ?></td>
-                    <td><?= date('Y-m-d', strtotime($peminjam['tgl_peminjaman'])) ?></td>
-                    <td><?= $peminjam['tgl_pengembalian'] ?></td>
-                    <td><?= $peminjam['status'] ?></td>
-                    <?php if ($peminjam['status'] === 'Diproses' ):?>
-                        <form action="<?= BASE_URL.'/admin/daftarpeminjaman.php'?>" method='POST'><td>
-                            <input type="hidden" value= '<?= $peminjam ['id_buku']?>' name="buku">
-                            <button name='terima' value='<?= $peminjam['id_peminjaman'] ?>' class="btn-edit">Terima</button>
-                        </td></form>
-                    <?php endif; ?>
-                </tr>
+            <tr>
+                <td><?= $peminjam['judul_buku'] ?></td>
+                <td><?= $peminjam['username_pemustaka'] ?></td>
+                <td><?= date('Y-m-d', strtotime($peminjam['tgl_peminjaman'])) ?></td>
+                <td><?= $peminjam['tgl_pengembalian'] ?></td>
+                <td><?= $peminjam['status'] ?></td>
+                <?php if ($peminjam['status'] === 'Diproses' ):?>
+                <form action="<?= BASE_URL.'/admin/daftarpeminjaman.php'?>" method='POST'><td>
+                    <input type="hidden" value= '<?= $peminjam ['id_buku']?>' name="buku">
+                    <button name='terima' value='<?= $peminjam['id_peminjaman'] ?>' class="btn-edit">Terima</button>
+                    </td></form>
+                <?php endif; ?>
+            </tr>
         <?php endforeach?>
             
         </table>

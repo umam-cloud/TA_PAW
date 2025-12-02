@@ -34,7 +34,7 @@ function Alfanumerik($data){
 
 // validasi alamat
 function Alamat($data){
-    return preg_match("/^[\w .\s]+$/",$data);
+    return preg_match("/^[a-zA-Z0-9\s,\.\/-]{2,100}$/",$data);
 }
 
 // validasi password
@@ -54,14 +54,19 @@ function minusn($data){
 
 // validasi tanggal lahir
 function tanggal($tahun, $bulan, $tanggal){
-    $tanggal_lahir = mktime(0,0,0, $bulan, $tanggal, $tahun);
-    $tahun_skrg = date('Y');
-
-    if ($tahun_skrg - $tahun >= 8){
-        return TRUE;
-    }else{
+    if (!Numerik($tahun) or !Numerik($tahun) or !Numerik($tahun)) {
         return FALSE;
+    }else {     
+        $tanggal_lahir = mktime(0,0,0, $bulan, $tanggal, $tahun);
+        $tahun_skrg = date('Y');
+    
+        if ($tahun_skrg - $tahun >= 8 and $tahun_skrg - $tahun <= 40){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
     }
+
 }
 
 // validasi stok buku
@@ -71,7 +76,36 @@ function stok($data){
 
 // validasi tahun terbit buku
 function TahunTerbit($data){
-    return preg_match("/^[20-9]{4}$/",$data);
+    return preg_match("/^[0-9]{4}$/",$data);
 }
+
+function validasiGambar($file){
+    // Ekstensi yang diizinkan
+    $allowedExt  = ['jpg','jpeg','png','webp'];
+    // MIME asli yang diizinkan
+    $allowedMime = ['image/jpeg','image/png','image/webp'];
+
+    // Ambil data file
+    $fileName = $file['name'];
+    $tmpFile  = $file['tmp_name'];
+    
+    // Ambil ekstensi
+    $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    // Ekstensi tidak valid
+    if(!in_array($ext, $allowedExt)){
+        return false;
+    }
+
+    // Cek MIME asli dari isi file
+    $mimeType = mime_content_type($tmpFile);
+
+    if(!in_array($mimeType, $allowedMime)){
+        return false;
+    }
+
+    return true; // Lolos validasi
+}
+
 
 ?>

@@ -44,7 +44,7 @@
                     <div class="status-koleksi">
                         <?php if ($koleksi['status'] === 'Dipinjam' ):?>
                             <form method='POST'>
-                                <button name='kembalikan' value='<?= $koleksi['id_peminjaman'] ?>' class="btn-edit">Kembalikan</button>
+                                <button name='kembalikan' value='<?= $koleksi['id_peminjaman'] ?>' class="btn-pinjam">Kembalikan</button>
                             </form>
                         <?php elseif ($koleksi['status'] === 'Diproses'): ?>
                             <div class="status">

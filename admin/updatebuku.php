@@ -16,13 +16,16 @@
         $penulis = $_POST['penulis'];
         $tahun_terbit = $_POST['tahun_terbit'];
         $stok = $_POST['stok'];
+        $kategori = $_POST['kategori'];
 
         if (isset($_POST['btn'])) {
             if ($_POST['btn']=='simpan') {
                 $answer = TRUE;
-                if(empty($_FILES['cover']['name'])){
-                    $error_cover ='wajib di isi';
-                    $answer = FALSE;
+                if(!empty($_FILES['cover']['name'])){
+					if(!validasiGambar($_FILES['cover'])){
+                        $error_cover ="Tipe file tidak valid! Hanya boleh JPG, JPEG, PNG, WEBP.";
+                        $answer = FALSE;
+					}
                 }
     
                 if(!wajib_isi($judul)){

@@ -59,7 +59,7 @@
                             <p>Penerbit : <?= $book['Penerbit'] ?></p>
                             <p>Terbit : <?= $book['Tahun_Terbit'] ?></p>
                             <p>Stok : <?= $book['Stok'] ?></p>
-                            <?php if($book['Stok'] >0): ?>
+                        	<?php if($book['Stok'] >0): ?>
                             	<form action="<?= BASE_URL.'/pemustaka/daftarbuku.php'?>" method='POST'><button name='pinjam' value='<?= $book['id_buku']?>' class="btn-pinjam">Pinjam</button></form>
                         	<?php else: ?>
                         		<p>Stok Buku Habis</p>

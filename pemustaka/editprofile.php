@@ -4,7 +4,7 @@
 
     $idUser = $_SESSION['id_user'];
     $dataPemustaka = getDataPemustaka($idUser);
-    $error_username = $error_nomor = $error_email = $error_alamat = $error_ttl = $error_jenkel =  $error_register ='';
+    $error_username = $error_nomor = $error_email = $error_alamat = $error_ttl = $error_jenkel =  $error_register = $error_profil ='';
 
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         $username = $_POST['username']?? '';
@@ -12,9 +12,18 @@
         $alamat = $_POST['alamat'] ?? '';
         $nomor = $_POST['tlp'] ?? '';
         $btn = $_POST['btn'] ?? '';
+        
 
         if ($btn == 'simpan') {
             $succses = TRUE;
+            
+           if(!empty($_FILES['cover']['name'])){
+                if(!validasiGambar($_FILES['cover'])){
+                    $error_cover ="Tipe file tidak valid! Hanya boleh JPG, JPEG, PNG, WEBP.";
+                    $answer = FALSE;
+                }
+            }
+            
             if(!wajib_isi($username)){
                 $error_username = 'Username wajib di isi';
                 $succses = FALSE;
@@ -95,6 +104,7 @@
                 <div class="form-group">
                     <label>Foto Profile</label>
                     <input type="file" name="profil">
+                     <p class="error"><?= $error_profil?></p>
                 </div>
 
                 <div class="form-group">
